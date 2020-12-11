@@ -1,7 +1,7 @@
 {
-  "name": "material-kit-react",
+  "name": "lhd-delta",
   "version": "1.9.0",
-  "description": "Material Kit React. Coded by Creative Tim",
+  "description": "LHD Delta website",
   "private": true,
   "main": "src/index.js",
   "dependencies": {
