@@ -1,4 +1,20 @@
+/*!
 
+=========================================================
+* Argon Design System React - v1.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/argon-design-system-react
+* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/argon-design-system-react/blob/master/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
 /*eslint-disable*/
 import React from "react";
 // reactstrap components
@@ -92,7 +108,12 @@ class SimpleFooter extends React.Component {
               <Col md="6">
                 <div className=" copyright">
                   © {new Date().getFullYear()}{" "}
-                    Niek van der Plas
+                  <a
+                    href="https://www.creative-tim.com?ref=adsr-footer"
+                    target="_blank"
+                  >
+                    Creative Tim
+                  </a>
                   .
                 </div>
               </Col>
