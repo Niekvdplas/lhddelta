@@ -1,0 +1,22 @@
+type Leden @model {
+  id: ID!
+  initials: String!
+  last_name: String!
+  full_name: String
+}
+
+type Jaren @model {
+  id: ID!
+  members: String!
+  name: String
+  year: Int!
+}
+
+type Besturen @model {
+  id: ID!
+  name: String!
+  praeses: String!
+  quaestor: String!
+  abactis: String!
+  assessor: String
+}
