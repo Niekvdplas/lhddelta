@@ -67,6 +67,7 @@ export const getBesturen = /* GraphQL */ `
   query GetBesturen($id: ID!) {
     getBesturen(id: $id) {
       id
+      seq_num
       name
       praeses
       quaestor
@@ -86,6 +87,7 @@ export const listBesturens = /* GraphQL */ `
     listBesturens(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        seq_num
         name
         praeses
         quaestor

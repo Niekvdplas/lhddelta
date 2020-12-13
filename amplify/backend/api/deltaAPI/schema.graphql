@@ -14,6 +14,7 @@ type Jaren @model {
 
 type Besturen @model {
   id: ID!
+  seq_num: Int
   name: String!
   praeses: String!
   quaestor: String!

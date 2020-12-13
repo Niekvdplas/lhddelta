@@ -14,7 +14,7 @@ import LandingPage from "views/LandingPage/LandingPage.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import { listLedens, listBesturens } from "graphql/queries";
-import { updateLeden } from "graphql/mutations";
+import { updateLeden, updateBesturen } from "graphql/mutations";
 import { createLeden, createJaren, createBesturen } from "graphql/mutations";
 import { PagesSharp, StarRate } from "@material-ui/icons";
 import { getLeden } from "graphql/queries";
@@ -25,16 +25,46 @@ Amplify.configure(awsconfig);
 
 var bestuur = {praeses: "", quaestor: "", abactis: "", assessor: ""}
 
+const values = new Map([
+  ['I', 1],
+  ['V', 5],
+  ['X', 10],
+  ['L', 50],
+  ['C', 100],
+  ['D', 500],
+  ['M', 1000]
+]);
+
+function romanToInt(string) {
+  let result = 0,
+    current, previous = 0;
+  for (const char of string.split("").reverse()) {
+    current = values.get(char);
+    if (current >= previous) {
+      result += current;
+    } else {
+      result -= current;
+    }
+    previous = current;
+  }
+  return result - 1;
+}
+
+function sortFunction(a, b) {
+  if (a.seq_num === b.seq_num) {
+      return 0;
+  }
+  else {
+      return (a.seq_num < b.seq_num) ? -1 : 1;
+  }
+}
+
 function test(){  
     const getLid = async() => {
       const besturen = await API.graphql(graphqlOperation(listBesturens, {limit: 1000}));
       const besturenlist = besturen.data.listBesturens.items;
-      for(const elem of besturenlist){
-        var k = bestuur;
-        const name = await API.graphql(graphqlOperation(getLeden, {id: elem.praeses}))
-        const fullname = name.data.getLeden.initials + " " +  name.data.getLeden.last_name;
-        console.log(fullname)
-      }
+      besturenlist.sort(sortFunction)
+      
     }
     getLid();
 }

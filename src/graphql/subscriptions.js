@@ -77,6 +77,7 @@ export const onCreateBesturen = /* GraphQL */ `
   subscription OnCreateBesturen {
     onCreateBesturen {
       id
+      seq_num
       name
       praeses
       quaestor
@@ -91,6 +92,7 @@ export const onUpdateBesturen = /* GraphQL */ `
   subscription OnUpdateBesturen {
     onUpdateBesturen {
       id
+      seq_num
       name
       praeses
       quaestor
@@ -105,6 +107,7 @@ export const onDeleteBesturen = /* GraphQL */ `
   subscription OnDeleteBesturen {
     onDeleteBesturen {
       id
+      seq_num
       name
       praeses
       quaestor

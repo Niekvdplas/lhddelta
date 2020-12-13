@@ -98,6 +98,7 @@ export const createBesturen = /* GraphQL */ `
   ) {
     createBesturen(input: $input, condition: $condition) {
       id
+      seq_num
       name
       praeses
       quaestor
@@ -115,6 +116,7 @@ export const updateBesturen = /* GraphQL */ `
   ) {
     updateBesturen(input: $input, condition: $condition) {
       id
+      seq_num
       name
       praeses
       quaestor
@@ -132,6 +134,7 @@ export const deleteBesturen = /* GraphQL */ `
   ) {
     deleteBesturen(input: $input, condition: $condition) {
       id
+      seq_num
       name
       praeses
       quaestor
