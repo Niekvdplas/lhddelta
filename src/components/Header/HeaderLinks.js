@@ -30,7 +30,6 @@ export default function HeaderLinks(props) {
         <Button
           href="/LedenPage"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         >
           <Face className={classes.icons} /> Leden
@@ -38,9 +37,8 @@ export default function HeaderLinks(props) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
-          href="/BesturenPage"
+          href="/Besturen"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         >
           <SupervisorAccount className={classes.icons} /> Besturen
@@ -51,6 +49,7 @@ export default function HeaderLinks(props) {
           noLiPadding
           buttonText="Delta Playback Show"
           buttonProps={{
+            href: "/dpb",
             className: classes.navLink,
             color: "transparent"
           }}
@@ -70,6 +69,7 @@ export default function HeaderLinks(props) {
           noLiPadding
           buttonText="VAP"
           buttonProps={{
+            href: "/vap",
             className: classes.navLink,
             color: "transparent"
           }}
@@ -100,7 +100,6 @@ export default function HeaderLinks(props) {
         <Button
           href="/gala"
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         >
           <PartyMode className={classes.icons} /> Lustrumgala

@@ -18,6 +18,7 @@ import { updateLeden, updateBesturen } from "graphql/mutations";
 import { createLeden, createJaren, createBesturen } from "graphql/mutations";
 import { PagesSharp, StarRate } from "@material-ui/icons";
 import { getLeden } from "graphql/queries";
+import BesturenPage from "views/BesturenPage/BesturenPage";
 
 var hist = createBrowserHistory();
 
@@ -36,32 +37,31 @@ const values = new Map([
 ]);
 
 
-function sortFunction(a, b) {
-  if (a.seq_num === b.seq_num) {
-      return 0;
-  }
-  else {
-      return (a.seq_num < b.seq_num) ? -1 : 1;
-  }
-}
+// function sortFunction(a, b) {
+//   if (a.seq_num === b.seq_num) {
+//       return 0;
+//   }
+//   else {
+//       return (a.seq_num < b.seq_num) ? -1 : 1;
+//   }
+// }
 
-function test(){  
-    const getLid = async() => {
-      const besturen = await API.graphql(graphqlOperation(listBesturens, {limit: 1000}));
-      const besturenlist = besturen.data.listBesturens.items;
-      besturenlist.sort(sortFunction)
+// function test(){  
+//     const getLid = async() => {
+//       const besturen = await API.graphql(graphqlOperation(listBesturens, {limit: 1000}));
+//       const besturenlist = besturen.data.listBesturens.items;
+//       besturenlist.sort(sortFunction)
       
-    }
-    getLid();
-}
-
-test()
+//     }
+//     getLid();
+// }
 
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
       <Route path="/profile-page" component={ProfilePage} />
       <Route path="/login-page" component={LoginPage} />
+      <Route path='/besturen' component={BesturenPage} />
       <Route path="/" component={LandingPage} />
     </Switch>
   </Router>,
