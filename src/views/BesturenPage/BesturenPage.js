@@ -55,25 +55,6 @@ export default function BesturenPage(props) {
     }
   }, []);
 
-  async function getName(lid){
-    if(lid != ""){
-      if(lid.indexOf(';') == -1){
-        const response = await API.graphql(graphqlOperation(getLeden, {id: lid}));
-        const name = response.data.getLeden;
-        return name.initials + " " + name.last_name;
-      } else {
-        var leden = lid.split(';')
-        var returnName = ""
-        for(var sublit in leden){
-          const response = await API.graphql(graphqlOperation(getLeden, {id: leden[0]}));
-          const name = response.data.getLeden;
-          returnName += name.initials + " " + name.last_name + " / ";
-        }
-        return returnName.slice(0, -2)
-      }
-    }
-  }
-
   const getData = async() => {
     const response = await API.graphql(graphqlOperation(listBesturens, {limit: 1000}));
     const besturenlist = response.data.listBesturens.items;
@@ -82,10 +63,10 @@ export default function BesturenPage(props) {
       let format = JSON.parse(JSON.stringify(k));
       var bestuur = besturenlist[i]
       format.name = bestuur.name;
-      format.praeses = await getName(bestuur.praeses);
-      format.quaestor = await getName(bestuur.quaestor);
-      format.abactis = await getName(bestuur.abactis);
-      format.assessor = await getName(bestuur.assessor);
+      format.praeses = bestuur.praeses;
+      format.quaestor = bestuur.quaestor;
+      format.abactis = bestuur.abactis;
+      format.assessor = bestuur.assessor;
       bestuurData.push(format);
     }
     setData(bestuurData);
