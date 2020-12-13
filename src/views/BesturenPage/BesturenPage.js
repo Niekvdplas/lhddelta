@@ -24,7 +24,6 @@ import { listLedens, listBesturens } from "graphql/queries";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
 import image from "assets/img/bg7.jpg";
-import { render } from "node-sass";
 
 const useStyles = makeStyles(styles);
 

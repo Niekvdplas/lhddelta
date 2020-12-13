@@ -24,8 +24,6 @@ var hist = createBrowserHistory();
 
 Amplify.configure(awsconfig);
 
-var bestuur = {praeses: "", quaestor: "", abactis: "", assessor: ""}
-
 const values = new Map([
   ['I', 1],
   ['V', 5],
