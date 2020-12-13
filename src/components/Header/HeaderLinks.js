@@ -12,7 +12,7 @@ import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 
 // @material-ui/icons
-import { Apps, CloudDownload } from "@material-ui/icons";
+import { Apps, CloudDownload, Face, PartyMode, SupervisorAccount } from "@material-ui/icons";
 
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
@@ -27,36 +27,83 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
+        <Button
+          href="/LedenPage"
+          color="transparent"
+          target="_blank"
+          className={classes.navLink}
+        >
+          <Face className={classes.icons} /> Leden
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/BesturenPage"
+          color="transparent"
+          target="_blank"
+          className={classes.navLink}
+        >
+          <SupervisorAccount className={classes.icons} /> Besturen
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
-          buttonText="Components"
+          buttonText="Delta Playback Show"
           buttonProps={{
             className: classes.navLink,
             color: "transparent"
           }}
           buttonIcon={Apps}
           dropdownList={[
-            <Link to="/" className={classes.dropdownLink}>
-              All components
+            <Link to="/geschiedenis" className={classes.dropdownLink}>
+              Geschiedenis
             </Link>,
-            <a
-              href="https://creativetimofficial.github.io/material-kit-react/#/documentation?ref=mkr-navbar"
-              target="_blank"
-              className={classes.dropdownLink}
-            >
-              Documentation
-            </a>
+            <Link to="/winnaars" className={classes.dropdownLink}>
+              Winnaars
+            </Link>
+          ]}
+        />
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <CustomDropdown
+          noLiPadding
+          buttonText="VAP"
+          buttonProps={{
+            className: classes.navLink,
+            color: "transparent"
+          }}
+          buttonIcon={Apps}
+          dropdownList={[
+            <Link to="/dkc" className={classes.dropdownLink}>
+              DKC
+            </Link>,
+            <Link to="/tiroler" className={classes.dropdownLink}>
+              Tiroler VAP
+            </Link>,
+            <Link to="/frat" className={classes.dropdownLink}>
+              American Fratpary VAP
+            </Link>,
+            <Link to="/victoria" className={classes.dropdownLink}>
+              Victoria's Secret VAP
+            </Link>,            
+            <Link to="/bbq" className={classes.dropdownLink}>
+              BBQ VAP
+            </Link>,
+            <Link to="/traditiones" className={classes.dropdownLink}>
+              Traditiones VAP
+            </Link> 
           ]}
         />
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
+          href="/gala"
           color="transparent"
           target="_blank"
           className={classes.navLink}
         >
-          <CloudDownload className={classes.icons} /> Download
+          <PartyMode className={classes.icons} /> Lustrumgala
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>

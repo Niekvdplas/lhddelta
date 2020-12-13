@@ -35,20 +35,6 @@ const values = new Map([
   ['M', 1000]
 ]);
 
-function romanToInt(string) {
-  let result = 0,
-    current, previous = 0;
-  for (const char of string.split("").reverse()) {
-    current = values.get(char);
-    if (current >= previous) {
-      result += current;
-    } else {
-      result -= current;
-    }
-    previous = current;
-  }
-  return result - 1;
-}
 
 function sortFunction(a, b) {
   if (a.seq_num === b.seq_num) {
@@ -74,10 +60,9 @@ test()
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
-      <Route path="/landing-page" component={LandingPage} />
       <Route path="/profile-page" component={ProfilePage} />
       <Route path="/login-page" component={LoginPage} />
-      <Route path="/" component={Components} />
+      <Route path="/" component={LandingPage} />
     </Switch>
   </Router>,
   document.getElementById("root")
