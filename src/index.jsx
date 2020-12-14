@@ -19,6 +19,9 @@ import { createLeden, createJaren, createBesturen } from "graphql/mutations";
 import { PagesSharp, StarRate } from "@material-ui/icons";
 import { getLeden } from "graphql/queries";
 import BesturenPage from "views/BesturenPage/BesturenPage";
+import { listJarens } from "graphql/queries";
+import { updateJaren } from "graphql/mutations";
+import LedenPage from "views/LedenPage/LedenPage";
 
 var hist = createBrowserHistory();
 
@@ -40,6 +43,7 @@ ReactDOM.render(
       <Route path="/profile-page" component={ProfilePage} />
       <Route path="/login-page" component={LoginPage} />
       <Route path='/besturen' component={BesturenPage} />
+      <Route path='/leden' component={LedenPage} />
       <Route path="/" component={LandingPage} />
     </Switch>
   </Router>,
