@@ -21,3 +21,11 @@ type Besturen @model {
   abactis: String!
   assessor: String
 }
+
+type Playback @model {
+  id: ID!
+  year: Int!
+  link: String
+  winner: String!
+  cancelled: String
+}

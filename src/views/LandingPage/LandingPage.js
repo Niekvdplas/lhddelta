@@ -53,12 +53,11 @@ export default function LandingPage(props) {
               <Button
                 color="danger"
                 size="lg"
-                href="https://www.youtube.com/watch?v=c45Q1ClXKR0"
-                target="_blank"
+                href="/dpb"
                 rel="noopener noreferrer"
               >
                 <i className="fas fa-play" />
-                Bekijk video over Lustrumgala
+                Bekijk de video over de Delta Playback
               </Button>
             </GridItem>
           </GridContainer>

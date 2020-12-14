@@ -23,20 +23,12 @@ import BesturenPage from "views/BesturenPage/BesturenPage";
 import { listJarens } from "graphql/queries";
 import { updateJaren } from "graphql/mutations";
 import LedenPage from "views/LedenPage/LedenPage";
+import { listPlaybacks } from "graphql/queries";
+import { createPlayback } from "graphql/mutations";
 
 var hist = createBrowserHistory();
 
 Amplify.configure(awsconfig);
-
-const values = new Map([
-  ['I', 1],
-  ['V', 5],
-  ['X', 10],
-  ['L', 50],
-  ['C', 100],
-  ['D', 500],
-  ['M', 1000]
-]);
 
 ReactDOM.render(
   <Router history={hist}>

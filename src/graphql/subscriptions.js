@@ -118,3 +118,42 @@ export const onDeleteBesturen = /* GraphQL */ `
     }
   }
 `;
+export const onCreatePlayback = /* GraphQL */ `
+  subscription OnCreatePlayback {
+    onCreatePlayback {
+      id
+      year
+      link
+      winner
+      cancelled
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePlayback = /* GraphQL */ `
+  subscription OnUpdatePlayback {
+    onUpdatePlayback {
+      id
+      year
+      link
+      winner
+      cancelled
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePlayback = /* GraphQL */ `
+  subscription OnDeletePlayback {
+    onDeletePlayback {
+      id
+      year
+      link
+      winner
+      cancelled
+      createdAt
+      updatedAt
+    }
+  }
+`;

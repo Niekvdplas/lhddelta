@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -32,12 +32,15 @@ import work4 from "assets/img/examples/mariya-georgieva.jpg";
 import work5 from "assets/img/examples/clem-onojegaw.jpg";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-import { History } from "@material-ui/icons";
+import { EmojiEvents, History } from "@material-ui/icons";
+import { listPlaybacks } from "graphql/queries";
+import Amplify, { API, graphqlOperation } from 'aws-amplify';
 
 const useStyles = makeStyles(styles);
 
 export default function DpbPage(props) {
   const classes = useStyles();
+  const [data, setData] = useState("");
   const { ...rest } = props;
   const imageClasses = classNames(
     classes.imgRaised,
@@ -46,11 +49,43 @@ export default function DpbPage(props) {
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
+  function sortFunction(a, b) {
+    if (a.year === b.year) {
+        return 0;
+    }
+    else {
+        return (a.year > b.year) ? -1 : 1;
+    }
+  }
+
+  useEffect(() => {
+    if(!data || data.link == ""){
+      getData();
+    }
+  }, []);
+
+  const getData = async() => {
+    const response = await API.graphql(graphqlOperation(listPlaybacks, {limit: 1000}));
+    const playbacklist = response.data.listPlaybacks.items;
+    playbacklist.sort(sortFunction)
+    var k = {link: "", pblist: [{year: 0, winner: ""}]}
+    k.pblist.pop()
+    for(var i = 0; i < playbacklist.length; i++){
+      var playbackEntry = playbacklist[i]
+      if(k.link == "" && playbackEntry.link != ""){
+        k.link = playbackEntry.link
+      }
+      if(playbackEntry.cancelled == 'y') playbackEntry.winner = "Afgelast"
+      k.pblist.push({year: playbackEntry.year, winner: playbackEntry.winner})
+    }
+    setData(k);
+  }
+
   return (
     <div>
       <Header
         color="transparent"
-        brand="Material Kit React"
+        brand="Delta Playback Show"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -72,8 +107,9 @@ export default function DpbPage(props) {
                   </div>
                   <div>
                   <ReactPlayer
-                    url="https://player.vimeo.com/video/277358211"
-                    playing={true}
+                    url={data.link == "" ? null : data.link}
+                    playing={false}
+                    volume={0.15}
                   />
                 </div>
                 </div>
@@ -85,7 +121,7 @@ export default function DpbPage(props) {
               </p>
             </div>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
+              <GridItem xs={12} sm={12} md={9} className={classes.navWrapper}>
                 <NavPills
                   alignCenter
                   color="primary"
@@ -101,78 +137,15 @@ export default function DpbPage(props) {
                       )
                     },
                     {
-                      tabButton: "Work",
-                      tabIcon: Palette,
-                      tabContent: (
-                        <GridContainer justify="center">
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={work1}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={work2}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={work3}
-                              className={navImageClasses}
-                            />
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={work4}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={work5}
-                              className={navImageClasses}
-                            />
-                          </GridItem>
-                        </GridContainer>
-                      )
-                    },
-                    {
-                      tabButton: "Favorite",
-                      tabIcon: Favorite,
-                      tabContent: (
-                        <GridContainer justify="center">
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={work4}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={studio3}
-                              className={navImageClasses}
-                            />
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={work2}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={work1}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={studio1}
-                              className={navImageClasses}
-                            />
-                          </GridItem>
-                        </GridContainer>
-                      )
+                      tabButton: "Winnaars",
+                      tabIcon: EmojiEvents,
+                      tabContent:
+                        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 20 }}>
+                          {data.pblist != undefined ? 
+                          data.pblist.map(el => 
+                            <div><li>{el.year} {el.winner}</li></div>)
+                          : null}
+                        </div>
                     }
                   ]}
                 />
@@ -185,3 +158,35 @@ export default function DpbPage(props) {
     </div>
   );
 }
+
+// <GridContainer justify="center">
+//                           <GridItem xs={12} sm={12} md={4}>
+//                             <img
+//                               alt="..."
+//                               src={work1}
+//                               className={navImageClasses}
+//                             />
+//                             <img
+//                               alt="..."
+//                               src={work2}
+//                               className={navImageClasses}
+//                             />
+//                             <img
+//                               alt="..."
+//                               src={work3}
+//                               className={navImageClasses}
+//                             />
+//                           </GridItem>
+//                           <GridItem xs={12} sm={12} md={4}>
+//                             <img
+//                               alt="..."
+//                               src={work4}
+//                               className={navImageClasses}
+//                             />
+//                             <img
+//                               alt="..."
+//                               src={work5}
+//                               className={navImageClasses}
+//                             />
+//                           </GridItem>
+//                         </GridContainer>

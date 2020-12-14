@@ -145,3 +145,51 @@ export const deleteBesturen = /* GraphQL */ `
     }
   }
 `;
+export const createPlayback = /* GraphQL */ `
+  mutation CreatePlayback(
+    $input: CreatePlaybackInput!
+    $condition: ModelPlaybackConditionInput
+  ) {
+    createPlayback(input: $input, condition: $condition) {
+      id
+      year
+      link
+      winner
+      cancelled
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePlayback = /* GraphQL */ `
+  mutation UpdatePlayback(
+    $input: UpdatePlaybackInput!
+    $condition: ModelPlaybackConditionInput
+  ) {
+    updatePlayback(input: $input, condition: $condition) {
+      id
+      year
+      link
+      winner
+      cancelled
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePlayback = /* GraphQL */ `
+  mutation DeletePlayback(
+    $input: DeletePlaybackInput!
+    $condition: ModelPlaybackConditionInput
+  ) {
+    deletePlayback(input: $input, condition: $condition) {
+      id
+      year
+      link
+      winner
+      cancelled
+      createdAt
+      updatedAt
+    }
+  }
+`;

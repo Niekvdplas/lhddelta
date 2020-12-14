@@ -100,3 +100,36 @@ export const listBesturens = /* GraphQL */ `
     }
   }
 `;
+export const getPlayback = /* GraphQL */ `
+  query GetPlayback($id: ID!) {
+    getPlayback(id: $id) {
+      id
+      year
+      link
+      winner
+      cancelled
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPlaybacks = /* GraphQL */ `
+  query ListPlaybacks(
+    $filter: ModelPlaybackFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPlaybacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        year
+        link
+        winner
+        cancelled
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
