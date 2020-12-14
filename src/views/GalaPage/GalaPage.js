@@ -37,11 +37,6 @@ export default function GalaPage(props) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-  var test = false
-
-  function trythis() {
-    console.log("t")
-  }
 
   function sortFunction(a, b) {
     if (a.year === b.year) {

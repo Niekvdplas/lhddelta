@@ -72,7 +72,6 @@ export default function VapPage(props) {
     bestuurlist.sort(sortFunction)
     k.abactis = bestuurlist[0].abactis;
     k.bestuur = bestuurlist[0].name.substr(0, bestuurlist[0].name.lastIndexOf(' '));
-    console.log(k)
     k.dkc = {praeses: "Alwin van der Linden", quaestor: "Jort Heijne", praesesemail:"test@test.nl", quaestoremail:"test@test.nl", praesesnummer:"06123456789", quaestornummer:"06123456789"}
     setData(k);
   }
