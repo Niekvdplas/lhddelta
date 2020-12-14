@@ -35,6 +35,7 @@ import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { EmojiEvents, Filter1, Filter2, Filter3, Filter4, Filter5Outlined, Filter5Rounded, Group, History } from "@material-ui/icons";
 import { listPlaybacks } from "graphql/queries";
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
+import { listBesturens } from "graphql/queries";
 
 const useStyles = makeStyles(styles);
 
@@ -48,38 +49,33 @@ export default function VapPage(props) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+  var k = {abactis: "", dkc: {praeses: "", quaestor: "", praesesemail: "", quaestoremail: "", praesesnummer: "", quaestornummer: ""}, bestuur: ""}
 
   function sortFunction(a, b) {
-    if (a.year === b.year) {
+    if (a.seq_num === b.seq_num) {
       return 0;
     }
     else {
-      return (a.year > b.year) ? -1 : 1;
+      return (a.seq_num > b.seq_num) ? -1 : 1;
     }
   }
 
-  // useEffect(() => {
-  //   if(!data || data.link == ""){
-  //     getData();
-  //   }
-  // }, []);
+  useEffect(() => {
+    if(!data || data.link == ""){
+      getData();
+    }
+  }, []);
 
-  // const getData = async() => {
-  //   const response = await API.graphql(graphqlOperation(listPlaybacks, {limit: 1000}));
-  //   const playbacklist = response.data.listPlaybacks.items;
-  //   playbacklist.sort(sortFunction)
-  //   var k = {link: "", pblist: [{year: 0, winner: ""}]}
-  //   k.pblist.pop()
-  //   for(var i = 0; i < playbacklist.length; i++){
-  //     var playbackEntry = playbacklist[i]
-  //     if(k.link == "" && playbackEntry.link != ""){
-  //       k.link = playbackEntry.link
-  //     }
-  //     if(playbackEntry.cancelled == 'y') playbackEntry.winner = "Afgelast"
-  //     k.pblist.push({year: playbackEntry.year, winner: playbackEntry.winner})
-  //   }
-  //   setData(k);
-  // }
+  const getData = async() => {
+    const response = await API.graphql(graphqlOperation(listBesturens, {limit: 1000}));
+    const bestuurlist = response.data.listBesturens.items;
+    bestuurlist.sort(sortFunction)
+    k.abactis = bestuurlist[0].abactis;
+    k.bestuur = bestuurlist[0].name.substr(0, bestuurlist[0].name.lastIndexOf(' '));
+    console.log(k)
+    k.dkc = {praeses: "Alwin van der Linden", quaestor: "Jort Heijne", praesesemail:"test@test.nl", quaestoremail:"test@test.nl", praesesnummer:"06123456789", quaestornummer:"06123456789"}
+    setData(k);
+  }
 
   return (
     <div>
@@ -120,7 +116,7 @@ De DKC, oftewel de Delta Kennismakingscommissie, verzorgt alle VAP’s. Voor vra
 <br />
 Met Deltaanse groet,
 <br />
-Daniel van Vliet, Ab-Actis van het XLIIste bestuur der L.H.D. DELTA
+{data.abactis != undefined ? data.abactis : null}, Ab-Actis van het {data.bestuur != undefined ? data.bestuur : null} der L.H.D. DELTA
               </p>
             </div>
             <GridContainer justify="center">
@@ -134,14 +130,14 @@ Daniel van Vliet, Ab-Actis van het XLIIste bestuur der L.H.D. DELTA
                       tabIcon: Group,
                       tabContent: (
                         <p>
-                          De Delta Kennismakings Commissie  2018 bestaat dit jaar uit Jordy Sanders en Niels Brom.
+                          De Delta Kennismakings Commissie {new Date().getFullYear()} bestaat dit jaar uit {data.dkc != undefined ? data.dkc.praeses : null} en {data.dkc != undefined ? data.dkc.quaestor : null}
                           <br />
                           Voor vragen of contact over de VAPs, het dispuut of aangelegenheden waar geschroefd wordt, schroom niet om te bellen of mailen naar:
                           <br />
                           <br />
-                          Jordy Sanders: 06 – 81 06 23 20 / jordysanders7(at)hotmail(dot)com
+                          {data.dkc != undefined ? data.dkc.praeses : null}: {data.dkc != undefined ? data.dkc.praesesnummer : null} / {data.dkc != undefined ? data.dkc.praesesemail : null}
                           <br />
-                          Niels Brom: 06 – 38 06 27 82 / Niels.sbc(at)live(dot)nl
+                          {data.dkc != undefined ? data.dkc.quaestor : null}: {data.dkc != undefined ? data.dkc.quaestornummer : null} / {data.dkc != undefined ? data.dkc.quaestoremail : null}
                         </p>
                       )
                     },

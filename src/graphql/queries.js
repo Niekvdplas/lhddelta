@@ -133,3 +133,32 @@ export const listPlaybacks = /* GraphQL */ `
     }
   }
 `;
+export const getGalaAanwezigen = /* GraphQL */ `
+  query GetGalaAanwezigen($id: ID!) {
+    getGalaAanwezigen(id: $id) {
+      id
+      year
+      names
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listGalaAanwezigens = /* GraphQL */ `
+  query ListGalaAanwezigens(
+    $filter: ModelGalaAanwezigenFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listGalaAanwezigens(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        year
+        names
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

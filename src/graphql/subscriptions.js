@@ -157,3 +157,36 @@ export const onDeletePlayback = /* GraphQL */ `
     }
   }
 `;
+export const onCreateGalaAanwezigen = /* GraphQL */ `
+  subscription OnCreateGalaAanwezigen {
+    onCreateGalaAanwezigen {
+      id
+      year
+      names
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateGalaAanwezigen = /* GraphQL */ `
+  subscription OnUpdateGalaAanwezigen {
+    onUpdateGalaAanwezigen {
+      id
+      year
+      names
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteGalaAanwezigen = /* GraphQL */ `
+  subscription OnDeleteGalaAanwezigen {
+    onDeleteGalaAanwezigen {
+      id
+      year
+      names
+      createdAt
+      updatedAt
+    }
+  }
+`;

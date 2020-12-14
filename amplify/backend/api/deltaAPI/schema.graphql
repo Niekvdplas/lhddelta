@@ -29,3 +29,9 @@ type Playback @model {
   winner: String!
   cancelled: String
 }
+
+type GalaAanwezigen @model {
+  id: ID!
+  year: Int!
+  names: String!
+}

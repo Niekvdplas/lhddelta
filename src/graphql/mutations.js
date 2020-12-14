@@ -193,3 +193,45 @@ export const deletePlayback = /* GraphQL */ `
     }
   }
 `;
+export const createGalaAanwezigen = /* GraphQL */ `
+  mutation CreateGalaAanwezigen(
+    $input: CreateGalaAanwezigenInput!
+    $condition: ModelGalaAanwezigenConditionInput
+  ) {
+    createGalaAanwezigen(input: $input, condition: $condition) {
+      id
+      year
+      names
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateGalaAanwezigen = /* GraphQL */ `
+  mutation UpdateGalaAanwezigen(
+    $input: UpdateGalaAanwezigenInput!
+    $condition: ModelGalaAanwezigenConditionInput
+  ) {
+    updateGalaAanwezigen(input: $input, condition: $condition) {
+      id
+      year
+      names
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteGalaAanwezigen = /* GraphQL */ `
+  mutation DeleteGalaAanwezigen(
+    $input: DeleteGalaAanwezigenInput!
+    $condition: ModelGalaAanwezigenConditionInput
+  ) {
+    deleteGalaAanwezigen(input: $input, condition: $condition) {
+      id
+      year
+      names
+      createdAt
+      updatedAt
+    }
+  }
+`;
