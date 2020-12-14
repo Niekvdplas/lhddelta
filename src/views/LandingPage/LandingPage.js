@@ -48,12 +48,12 @@ export default function LandingPage(props) {
               <h1 className={classes.title}>L.H.D. Delta</h1>
               <h4>
                 Hét dispuut van Quintus.
-                <img src={require("src/../assets/img/logo.png")}/>
+                <img src={require("src/../assets/img/logo.png")} width="40%"/>
               </h4>
               <br />
               <Button
                 color="danger"
-                size="lg"
+                size="xs sm md lg"
                 href="/dpb"
                 rel="noopener noreferrer"
               >
