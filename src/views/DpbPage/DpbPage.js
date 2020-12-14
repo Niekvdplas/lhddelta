@@ -110,6 +110,7 @@ export default function DpbPage(props) {
                     url={data.link == "" ? null : data.link}
                     playing={false}
                     volume={0.15}
+                    width="100%"
                   />
                 </div>
                 </div>
