@@ -1,0 +1,7 @@
+{
+    "name": "delta",
+    "integrations": {
+      "capacitor": {}
+    },
+    "type": "react"
+  }
