@@ -63,36 +63,13 @@ export default function HeaderLinks(props) {
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <CustomDropdown
-          noLiPadding
-          buttonText="VAP"
-          buttonProps={{
-            href: "/vap",
-            className: classes.navLink,
-            color: "transparent"
-          }}
-          buttonIcon={Apps}
-          dropdownList={[
-            <Link to="/dkc" className={classes.dropdownLink}>
-              DKC
-            </Link>,
-            <Link to="/tiroler" className={classes.dropdownLink}>
-              Tiroler VAP
-            </Link>,
-            <Link to="/frat" className={classes.dropdownLink}>
-              American Fratpary VAP
-            </Link>,
-            <Link to="/victoria" className={classes.dropdownLink}>
-              Victoria's Secret VAP
-            </Link>,            
-            <Link to="/bbq" className={classes.dropdownLink}>
-              BBQ VAP
-            </Link>,
-            <Link to="/traditiones" className={classes.dropdownLink}>
-              Traditiones VAP
-            </Link> 
-          ]}
-        />
+      <Button
+          href="/vap"
+          color="transparent"
+          className={classes.navLink}
+        >
+          <PartyMode className={classes.icons} /> VAP
+          </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button

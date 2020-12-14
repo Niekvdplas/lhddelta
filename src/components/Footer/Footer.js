@@ -32,7 +32,7 @@ export default function Footer(props) {
         <div className={classes.right}>
           &copy; {1900 + new Date().getYear()} , made with{" "}
           <Favorite className={classes.icon} /> by{" "}
-            Niek van der Plas(DE' 17)
+            Niek van der Plas (DE' 17)
         </div>
       </div>
     </footer>

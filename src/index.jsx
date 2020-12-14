@@ -25,6 +25,8 @@ import { updateJaren } from "graphql/mutations";
 import LedenPage from "views/LedenPage/LedenPage";
 import { listPlaybacks } from "graphql/queries";
 import { createPlayback } from "graphql/mutations";
+import VapPage from "views/VapPage/VapPage";
+import GalaPage from "views/GalaPage/GalaPage";
 
 var hist = createBrowserHistory();
 
@@ -35,6 +37,8 @@ ReactDOM.render(
     <Switch>
       <Route path="/profile-page" component={ProfilePage} />
       <Route path="/dpb" component={DpbPage} />
+      <Route path="/gala" component={GalaPage} />
+      <Route path="/vap" component={VapPage} />
       <Route path='/besturen' component={BesturenPage} />
       <Route path='/leden' component={LedenPage} />
       <Route path="/" component={LandingPage} />
