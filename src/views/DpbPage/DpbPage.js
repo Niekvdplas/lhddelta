@@ -140,12 +140,12 @@ export default function DpbPage(props) {
                       tabButton: "Winnaars",
                       tabIcon: EmojiEvents,
                       tabContent:
-                        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 20 }}>
+                      <GridContainer justify="center">
                           {data.pblist != undefined ? 
                           data.pblist.map(el => 
-                            <div><li>{el.year} {el.winner}</li></div>)
+                            <GridItem xs={6} sm={6} md={4} className={classes.navWrapper}><b><h3>{el.year}</h3></b><br /><h5>{el.winner}</h5></GridItem>)
                           : null}
-                        </div>
+                        </GridContainer>
                     }
                   ]}
                 />
