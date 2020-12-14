@@ -12,7 +12,7 @@ import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 
 // @material-ui/icons
-import { Apps, ChangeHistory, CloudDownload, Face, PartyMode, SupervisorAccount } from "@material-ui/icons";
+import { Apps, ChangeHistory, CloudDownload, Face, PartyMode, SupervisorAccount, Theaters } from "@material-ui/icons";
 
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
@@ -54,24 +54,13 @@ export default function HeaderLinks(props) {
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <CustomDropdown
-          noLiPadding
-          buttonText="Delta Playback Show"
-          buttonProps={{
-            href: "/dpb",
-            className: classes.navLink,
-            color: "transparent"
-          }}
-          buttonIcon={Apps}
-          dropdownList={[
-            <Link to="/geschiedenis" className={classes.dropdownLink}>
-              Geschiedenis
-            </Link>,
-            <Link to="/winnaars" className={classes.dropdownLink}>
-              Winnaars
-            </Link>
-          ]}
-        />
+        <Button
+          href="/dpb"
+          color="transparent"
+          className={classes.navLink}
+        >
+          <Theaters className={classes.icons} /> Delta Playback Show
+        </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
         <CustomDropdown
