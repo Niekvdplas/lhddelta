@@ -18,19 +18,6 @@ import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 import ReactPlayer from "react-player";
 
-import profile from "assets/img/faces/christian.jpg";
-
-import studio1 from "assets/img/examples/studio-1.jpg";
-import studio2 from "assets/img/examples/studio-2.jpg";
-import studio3 from "assets/img/examples/studio-3.jpg";
-import studio4 from "assets/img/examples/studio-4.jpg";
-import studio5 from "assets/img/examples/studio-5.jpg";
-import work1 from "assets/img/examples/olu-eletu.jpg";
-import work2 from "assets/img/examples/clem-onojeghuo.jpg";
-import work3 from "assets/img/examples/cynthia-del-rio.jpg";
-import work4 from "assets/img/examples/mariya-georgieva.jpg";
-import work5 from "assets/img/examples/clem-onojegaw.jpg";
-
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { EmojiEvents, History } from "@material-ui/icons";
 import { listPlaybacks } from "graphql/queries";
@@ -121,7 +108,7 @@ export default function DpbPage(props) {
               Elk jaar wordt er bij onze manifestatie, de Playbackshow, een filmpje gemaakt. Dit filmpje is speciaal gemaakt voor de laatste editie van onze show.
               </p>
             </div>
-            <GridContainer justify="center">
+            <GridContainer justify="center" id="test">
               <GridItem xs={12} sm={12} md={9} className={classes.navWrapper}>
                 <NavPills
                   alignCenter

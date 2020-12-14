@@ -149,17 +149,17 @@ export default function GalaPage(props) {
                       tabContent: (
                         <p>
                           De aanmeldingsdeadline is 15 februari 2020! Tot nu toe hebben de volgende ereleden zich al aangemeld:
-                          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 20 }}>
+                          <GridContainer justify="center">
                             {data.aanwezigen != undefined ?
                               data.aanwezigen.map(el =>
-                                <div>
+                                <GridItem xs={6} sm={6} md={4} className={classes.navWrapper}>
                                   <b><h3>{el.year}</h3></b>
                                   {el.names.map(lid =>
                                     <li>{lid}</li>
                                   )}
-                                </div>)
+                                </GridItem>)
                               : null}
-                          </div>
+                          </GridContainer>
                         </p>
                       )
                     },

@@ -2,6 +2,7 @@
     display: none;
     }
     
-    .visible-panel {
+.visible-panel {
     display: block;
-    }
+    overflow-x: hidden;
+}
