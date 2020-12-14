@@ -74,7 +74,7 @@ export default function LedenPage(props) {
       <Header
         absolute
         color="transparent"
-        brand="Besturen"
+        brand="Leden"
         rightLinks={<HeaderLinks />}
         {...rest}
       />

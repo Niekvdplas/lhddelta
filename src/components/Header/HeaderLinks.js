@@ -12,7 +12,7 @@ import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 
 // @material-ui/icons
-import { Apps, CloudDownload, Face, PartyMode, SupervisorAccount } from "@material-ui/icons";
+import { Apps, ChangeHistory, CloudDownload, Face, PartyMode, SupervisorAccount } from "@material-ui/icons";
 
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
@@ -26,6 +26,15 @@ export default function HeaderLinks(props) {
   const classes = useStyles();
   return (
     <List className={classes.list}>
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/"
+          color="transparent"
+          className={classes.navLink}
+        >
+          <ChangeHistory className={classes.icons} /> L.H.D. Delta
+        </Button>
+      </ListItem>
       <ListItem className={classes.listItem}>
         <Button
           href="/Leden"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -27,13 +27,19 @@ const useStyles = makeStyles(styles);
 
 export default function TeamSection() {
   const classes = useStyles();
+  const [data, setData] = useState("");
+
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
     classes.imgFluid
   );
 
-  var praeses = "test";
+  useEffect(() => {
+    if(!data){
+      getData();
+    }
+  }, []);
 
   function sortFunction(a, b) {
     if (a.seq_num === b.seq_num) {
@@ -44,17 +50,17 @@ export default function TeamSection() {
     }
   }
 
-  const getBesturen = async() => {
+  const getData = async() => {
     const besturen = await API.graphql(graphqlOperation(listBesturens, {limit: 1000}));
     const besturenlist = besturen.data.listBesturens.items;
     besturenlist.sort(sortFunction)
-    console.log(getBesturen)
-    praeses = besturenlist[0].praeses;
+    setData(besturenlist[0]);
   }
+
   
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>Het h.t. zetelende XLIIste bestuur</h2>
+      <h2 className={classes.title}>Het h.t. zetelende {data != undefined ? data.name : null} </h2>
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={3}>
@@ -63,7 +69,7 @@ export default function TeamSection() {
                 <img src={team1} alt="..." className={imageClasses} />
               </GridItem>
               <h4 className={classes.cardTitle}>
-                Ruben Ludolph
+                {data != undefined ? data.praeses : null}
                 <br />
                 <small className={classes.smallTitle}>Praeses</small>
               </h4>
@@ -106,7 +112,7 @@ export default function TeamSection() {
                 <img src={team1} alt="..." className={imageClasses} />
               </GridItem>
               <h4 className={classes.cardTitle}>
-                Jesse Bosman
+              {data != undefined ? data.quaestor : null}
                 <br />
                 <small className={classes.smallTitle}>Quaestor</small>
               </h4>
@@ -149,7 +155,7 @@ export default function TeamSection() {
                 <img src={team2} alt="..." className={imageClasses} />
               </GridItem>
               <h4 className={classes.cardTitle}>
-                Daniel van Vliet
+              {data != undefined ? data.abactis : null}
                 <br />
                 <small className={classes.smallTitle}>Ab-Actis</small>
               </h4>
@@ -185,7 +191,7 @@ export default function TeamSection() {
                 <img src={team3} alt="..." className={imageClasses} />
               </GridItem>
               <h4 className={classes.cardTitle}>
-                Jurjen Booij
+              {data != undefined ? data.assessor : null}
                 <br />
                 <small className={classes.smallTitle}>Assessor</small>
               </h4>
