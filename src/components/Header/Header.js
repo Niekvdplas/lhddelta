@@ -64,6 +64,7 @@ export default function Header(props) {
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
+        <img src={require("src/../assets/img/logo.png")} width="50"/>
         {leftLinks !== undefined ? brandComponent : null}
         <div className={classes.flex}>
           {leftLinks !== undefined ? (

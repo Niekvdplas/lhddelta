@@ -48,6 +48,7 @@ export default function LandingPage(props) {
               <h1 className={classes.title}>L.H.D. Delta</h1>
               <h4>
                 Hét dispuut van Quintus.
+                <img src={require("src/../assets/img/logo.png")}/>
               </h4>
               <br />
               <Button
