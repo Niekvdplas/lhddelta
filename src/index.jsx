@@ -17,7 +17,7 @@ import LoginPage from "views/LoginPage/LoginPage.js";
 import { listLedens, listBesturens } from "graphql/queries";
 import { updateLeden, updateBesturen } from "graphql/mutations";
 import { createLeden, createJaren, createBesturen } from "graphql/mutations";
-import { PagesSharp, StarRate } from "@material-ui/icons";
+import { Height, PagesSharp, StarRate } from "@material-ui/icons";
 import { getLeden } from "graphql/queries";
 import BesturenPage from "views/BesturenPage/BesturenPage";
 import { listJarens } from "graphql/queries";

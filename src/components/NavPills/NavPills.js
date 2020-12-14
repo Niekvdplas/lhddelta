@@ -10,6 +10,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
+import './NavPills.css'
+
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -78,7 +80,7 @@ export default function NavPills(props) {
       >
         {tabs.map((prop, key) => {
           return (
-            <div className={classes.tabContent} key={key}>
+            <div className={key == active ? "visible-panel" : "hidden-panel"} key={key}>
               {prop.tabContent}
             </div>
           );

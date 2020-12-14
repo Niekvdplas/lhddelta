@@ -18,24 +18,12 @@ import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 import ReactPlayer from "react-player";
 
-import profile from "assets/img/faces/christian.jpg";
-
-import studio1 from "assets/img/examples/studio-1.jpg";
-import studio2 from "assets/img/examples/studio-2.jpg";
-import studio3 from "assets/img/examples/studio-3.jpg";
-import studio4 from "assets/img/examples/studio-4.jpg";
-import studio5 from "assets/img/examples/studio-5.jpg";
-import work1 from "assets/img/examples/olu-eletu.jpg";
-import work2 from "assets/img/examples/clem-onojeghuo.jpg";
-import work3 from "assets/img/examples/cynthia-del-rio.jpg";
-import work4 from "assets/img/examples/mariya-georgieva.jpg";
-import work5 from "assets/img/examples/clem-onojegaw.jpg";
-
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { EmojiEvents, Filter1, Filter2, Filter3, Filter4, Filter5Outlined, Filter5Rounded, Group, GroupSharp, History, LocationCity, PlayArrow } from "@material-ui/icons";
 import { listPlaybacks } from "graphql/queries";
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import { listGalaAanwezigens } from "graphql/queries";
+import { func } from "prop-types";
 
 const useStyles = makeStyles(styles);
 
@@ -49,6 +37,11 @@ export default function GalaPage(props) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+  var test = false
+
+  function trythis() {
+    console.log("t")
+  }
 
   function sortFunction(a, b) {
     if (a.year === b.year) {
@@ -60,28 +53,27 @@ export default function GalaPage(props) {
   }
 
   useEffect(() => {
-    if(!data || data.link == ""){
+    if (!data || data.link == "") {
       getData();
     }
   }, []);
 
 
-  const getData = async() => {
-    const response = await API.graphql(graphqlOperation(listGalaAanwezigens, {limit: 1000}));
+  const getData = async () => {
+    const response = await API.graphql(graphqlOperation(listGalaAanwezigens, { limit: 1000 }));
     const galalist = response.data.listGalaAanwezigens.items;
     galalist.sort(sortFunction)
-    var k = {aanwezigen: [{year: 0, names: []}]}
+    var k = { aanwezigen: [{ year: 0, names: [] }] }
     k.aanwezigen.pop()
-    for(var i = 0; i < galalist.length; i++){
+    for (var i = 0; i < galalist.length; i++) {
       var galaEntry = galalist[i]
-      k.aanwezigen.push({year: galaEntry.year, names: galaEntry.names.split(";")})
+      k.aanwezigen.push({ year: galaEntry.year, names: galaEntry.names.split(";") })
     }
-    console.log(k)
     setData(k);
   }
 
   return (
-    <div>
+    <div id="test">
       <Header
         color="transparent"
         brand="Lustrumgala"
@@ -97,7 +89,7 @@ export default function GalaPage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <div className={classes.container}>
-            <GridContainer justify="center">
+            <GridContainer justify="center" >
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div className={classes.name}>
@@ -144,14 +136,15 @@ export default function GalaPage(props) {
                 <NavPills
                   alignCenter
                   color="primary"
-                  tabs={[
+                  tabs=
+                  {[
                     {
                       tabButton: "Locatie",
                       tabIcon: LocationCity,
                       tabContent: (
                         <p>
                           Op deze pagina vindt U meer informatie over het programma en aanwezigen van het lustrumgala op 23 mei 2020 in <a href="https://kasteeloudwassenaar.eu/virtuele-rondleiding/">kasteel Oud-Wassenaar te Wassenaar</a>. Klik <a href="https://docs.google.com/forms/d/e/1FAIpQLSf4jZpjkcNbYZXivK4bUgXrk2JFr_FbCJLqNw0eWiStZJV74Q/viewform" >hier</a> om U aan te melden voor het lustrumgala.
-                          <img src="https://takethehague.nl/thumbs/1600x800c/2017-06/kasteel-wassenaar-ext5.jpg" width="800"/>
+                          <img src="https://takethehague.nl/thumbs/1600x800c/2017-06/kasteel-wassenaar-ext5.jpg" width="100%" />
                         </p>
                       )
                     },
@@ -162,25 +155,24 @@ export default function GalaPage(props) {
                         <p>
                           De aanmeldingsdeadline is 15 februari 2020! Tot nu toe hebben de volgende ereleden zich al aangemeld:
                           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 20 }}>
-                          {data.aanwezigen != undefined ? 
-                          data.aanwezigen.map(el => 
-                            <div>
-                              <b><h3>{el.year}</h3></b>
-                              {el.names.map(lid => 
-                                <li>{lid}</li>
-                              )}
-                            </div>)
-                          : null}
-                        </div>
+                            {data.aanwezigen != undefined ?
+                              data.aanwezigen.map(el =>
+                                <div>
+                                  <b><h3>{el.year}</h3></b>
+                                  {el.names.map(lid =>
+                                    <li>{lid}</li>
+                                  )}
+                                </div>)
+                              : null}
+                          </div>
                         </p>
-                        
                       )
                     },
                     {
                       tabButton: "Video",
                       tabIcon: PlayArrow,
                       tabContent: (
-                        <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                           <ReactPlayer
                             url="https://www.youtube.com/watch?v=c45Q1ClXKR0"
                             playing={false}
@@ -201,34 +193,3 @@ export default function GalaPage(props) {
   );
 }
 
-// <GridContainer justify="center">
-//                           <GridItem xs={12} sm={12} md={4}>
-//                             <img
-//                               alt="..."
-//                               src={work1}
-//                               className={navImageClasses}
-//                             />
-//                             <img
-//                               alt="..."
-//                               src={work2}
-//                               className={navImageClasses}
-//                             />
-//                             <img
-//                               alt="..."
-//                               src={work3}
-//                               className={navImageClasses}
-//                             />
-//                           </GridItem>
-//                           <GridItem xs={12} sm={12} md={4}>
-//                             <img
-//                               alt="..."
-//                               src={work4}
-//                               className={navImageClasses}
-//                             />
-//                             <img
-//                               alt="..."
-//                               src={work5}
-//                               className={navImageClasses}
-//                             />
-//                           </GridItem>
-//                         </GridContainer>
