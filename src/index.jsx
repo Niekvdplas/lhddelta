@@ -27,7 +27,7 @@ import { listPlaybacks } from "graphql/queries";
 import { createPlayback } from "graphql/mutations";
 import VapPage from "views/VapPage/VapPage";
 import GalaPage from "views/GalaPage/GalaPage";
-import { createGalaAanwezigen } from "graphql/mutations";
+import AdminPage from "views/AdminPage/AdminPage";
 
 var hist = createBrowserHistory();
 
@@ -37,6 +37,7 @@ Amplify.configure(awsconfig);
 ReactDOM.render(
   <Router history={hist}>
     <Switch>
+      <Route path="/deltaadmin" component={AdminPage} />
       <Route path="/profile-page" component={ProfilePage} />
       <Route path="/dpb" component={DpbPage} />
       <Route path="/gala" component={GalaPage} />

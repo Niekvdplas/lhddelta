@@ -18,6 +18,7 @@ export default function CustomInput(props) {
   const {
     formControlProps,
     labelText,
+    onChange,
     id,
     labelProps,
     inputProps,
@@ -73,6 +74,7 @@ export default function CustomInput(props) {
         }}
         id={id}
         {...inputProps}
+        onChange={onChange}
       />
     </FormControl>
   );
