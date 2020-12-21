@@ -83,6 +83,7 @@ export const onCreateBesturen = /* GraphQL */ `
       quaestor
       abactis
       assessor
+      abmail
       createdAt
       updatedAt
     }
@@ -98,6 +99,7 @@ export const onUpdateBesturen = /* GraphQL */ `
       quaestor
       abactis
       assessor
+      abmail
       createdAt
       updatedAt
     }
@@ -113,6 +115,7 @@ export const onDeleteBesturen = /* GraphQL */ `
       quaestor
       abactis
       assessor
+      abmail
       createdAt
       updatedAt
     }
@@ -185,6 +188,51 @@ export const onDeleteGalaAanwezigen = /* GraphQL */ `
       id
       year
       names
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateOverig = /* GraphQL */ `
+  subscription OnCreateOverig {
+    onCreateOverig {
+      id
+      dkcpraeses
+      dkcpraesesemail
+      dkcpraesesnummer
+      dkcquaestor
+      dkcquaestoremail
+      dkcquaestornummer
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateOverig = /* GraphQL */ `
+  subscription OnUpdateOverig {
+    onUpdateOverig {
+      id
+      dkcpraeses
+      dkcpraesesemail
+      dkcpraesesnummer
+      dkcquaestor
+      dkcquaestoremail
+      dkcquaestornummer
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteOverig = /* GraphQL */ `
+  subscription OnDeleteOverig {
+    onDeleteOverig {
+      id
+      dkcpraeses
+      dkcpraesesemail
+      dkcpraesesnummer
+      dkcquaestor
+      dkcquaestoremail
+      dkcquaestornummer
       createdAt
       updatedAt
     }

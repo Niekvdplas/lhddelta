@@ -21,7 +21,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import crypto from "crypto"
 import NavPills from "components/NavPills/NavPills.js";
-import { Cake, EmailOutlined, EmojiEvents, Face, Grade, Group, History, PlusOne, PublishRounded, Theaters } from "@material-ui/icons";
+import { Cake, EmailOutlined, EmojiEvents, Face, Grade, Group, History, Phone, PlusOne, PublishRounded, Theaters } from "@material-ui/icons";
 import {v4 as uuidv4 } from 'uuid';
 
 
@@ -41,6 +41,7 @@ import { bool } from "prop-types";
 import { updateGalaAanwezigen } from "graphql/mutations";
 import { createGalaAanwezigen } from "graphql/mutations";
 import { createPlayback } from "graphql/mutations";
+import { updateOverig } from "graphql/mutations";
 
 const useStyles = makeStyles(styles);
 
@@ -49,6 +50,7 @@ export default function AdminPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   const [ledenList, setledenList] = useState([{ firstname: "", lastname: "", initials: "" }]);
   const [bestuur, setBestuur] = useState({id: uuidv4(), name: "", praeses: "", quaestor: "", abactis: "", assessor: "", seq_num: new Date().getFullYear() - 1979});
+  const [dkc, setDKC] = useState({id: "d1b3e65a-fde3-44f3-b327-afeeba41e8b7", dkcpraeses: "", dkcquaestor: "", dkcpraesesemail: "", dkcquaestoremail: "", dkcpraesesnummer: "", dkcquaestornummer: ""});
   const [year, setYear] = useState(0);
   const [jarenlist, setjarenlist] = useState([])
   const [jaarleden, setjaarleden] = useState([])
@@ -94,6 +96,13 @@ export default function AdminPage(props) {
     best[index] = value;
     setBestuur(best);
   };
+
+  const handleDKCchange = (e, index) => {
+    const {name, value} = e.target;
+    const dkcbestuur = dkc;
+    dkcbestuur[index] = value;
+    setDKC(dkcbestuur)
+  }
    
   // handle click event of the Remove button
   const handleRemoveClick = index => {
@@ -110,6 +119,14 @@ export default function AdminPage(props) {
   const postBestuur = async () => {
     if(authenticate){
       const post = await API.graphql(graphqlOperation(createBesturen, {input: bestuur}));
+      window.location.href = '../';
+    }
+  }
+
+  const updateDKC = async () => {
+    if(authenticate){
+      const update = await API.graphql(graphqlOperation(updateOverig, {input: dkc}));
+      window.location.href = '../';
     }
   }
 
@@ -163,6 +180,7 @@ export default function AdminPage(props) {
         var k = {id: uuidv4(), names: galaattendee, year: galayear}
         const post = await API.graphql(graphqlOperation(createGalaAanwezigen, {input: k}))
       }
+      window.location.href = '../';
     }
   }
 
@@ -173,6 +191,7 @@ export default function AdminPage(props) {
         cancelled = 't'
       }
       const post = await API.graphql(graphqlOperation(createPlayback, {input: {id: uuidv4(), cancelled: cancelled, winner: dpbwinner, year: new Date().getFullYear()}}))
+      window.location.href = '../';
     }
   }
 
@@ -190,6 +209,7 @@ export default function AdminPage(props) {
       delete jaarleden.createdAt
       delete jaarleden.updatedAt
       const update = await API.graphql(graphqlOperation(updateJaren, {input: jaarleden}));
+      window.location.href = '../';
     }
   }
   
@@ -209,6 +229,7 @@ export default function AdminPage(props) {
       newYear.members = memberstring;
       newYear.year = year;
       const postnewYear = await API.graphql(graphqlOperation(createJaren, {input: newYear}))
+      window.location.href = '../';
     }
   };
 
@@ -232,7 +253,7 @@ export default function AdminPage(props) {
         <div className={classes.container}>
           <CustomInput onChange={e => setloginpw(e.target.value)}></CustomInput>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={8}>
+            <GridItem xs={12} sm={12} md={12}>
               <Card className={classes[cardAnimaton]}>
                   <CardHeader color="primary" className={classes.cardHeader}>
                     <h4>Update data</h4>
@@ -430,6 +451,124 @@ export default function AdminPage(props) {
                           </GridItem>
                       },
                       {
+                        tabButton: "Nieuwe DKC",
+                        tabIcon: Group,
+                        tabContent:
+                          <GridItem>
+                            <CardBody>
+                            <CustomInput
+                                labelText="Praeses"
+                                id="praeses"
+                                onChange={e => handleDKCchange(e, "dkcpraeses")}
+                                formControlProps={{
+                                  fullWidth: true
+                                }}
+                                inputProps={{
+                                  type: "text",
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <Face className={classes.inputIconsColor}>
+                                        lock_outline
+                                                  </Face>
+                                    </InputAdornment>
+                                  )
+                                }}
+                              />
+                              <CustomInput
+                                labelText="Praeses email"
+                                id="dkcpraesesemail"
+                                onChange={e => handleDKCchange(e, "dkcpraesesemail")}
+                                formControlProps={{
+                                  fullWidth: true
+                                }}
+                                inputProps={{
+                                  type: "text",
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <Email className={classes.inputIconsColor} />
+                                    </InputAdornment>
+                                  )
+                                }}
+                              />
+                              <CustomInput
+                                labelText="Praeses nummer"
+                                id="dkcpraesesnummer"
+                                onChange={e => handleDKCchange(e, "dkcpraesesnummer")}
+                                formControlProps={{
+                                  fullWidth: true
+                                }}
+                                inputProps={{
+                                  type: "text",
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <Phone className={classes.inputIconsColor}>
+                                        lock_outline
+                                                  </Phone>
+                                    </InputAdornment>
+                                  )
+                                }}
+                              />
+                                                                                        <CustomInput
+                                labelText="Quaestor"
+                                id="quaestor"
+                                onChange={e => handleDKCchange(e, "dkcquaestor")}
+                                formControlProps={{
+                                  fullWidth: true
+                                }}
+                                inputProps={{
+                                  type: "text",
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <Face className={classes.inputIconsColor}>
+                                        lock_outline
+                                                  </Face>
+                                    </InputAdornment>
+                                  )
+                                }}
+                              />
+                              <CustomInput
+                                labelText="Quaestor email"
+                                id="dkcquaestoremail"
+                                onChange={e => handleDKCchange(e, "dkcquaestoremail")}
+                                formControlProps={{
+                                  fullWidth: true
+                                }}
+                                inputProps={{
+                                  type: "text",
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <Email className={classes.inputIconsColor} />
+                                    </InputAdornment>
+                                  )
+                                }}
+                              />
+                              <CustomInput
+                                labelText="Quaestor nummer"
+                                id="dkcquaestornummer"
+                                onChange={e => handleDKCchange(e, "dkcquaestornummer")}
+                                formControlProps={{
+                                  fullWidth: true
+                                }}
+                                inputProps={{
+                                  type: "text",
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <Phone className={classes.inputIconsColor}>
+                                        lock_outline
+                                                  </Phone>
+                                    </InputAdornment>
+                                  )
+                                }}
+                              />
+                            </CardBody>
+                            <CardFooter className={classes.cardFooter}>
+                              <Button simple color="primary" size="lg" onClick={updateDKC}>
+                                Zend nieuw DKC.
+                              </Button>
+                            </CardFooter>
+                          </GridItem>
+                      },
+                      {
                         tabButton: "Verander jaar",
                         tabIcon: PublishRounded,
                         tabContent:
@@ -446,6 +585,7 @@ export default function AdminPage(props) {
                           <Button onClick={updateYear}>Update jaar</Button>
                         </div>
                       },
+                      
                       {
                         tabButton: "Update gala",
                         tabIcon: Grade,
@@ -457,7 +597,7 @@ export default function AdminPage(props) {
                         </div>
                       },
                       {
-                        tabButton: "nieuwe DPB winnaa",
+                        tabButton: "nieuwe DPB winnaar",
                         tabIcon: Theaters,
                         tabContent:
                         <div>

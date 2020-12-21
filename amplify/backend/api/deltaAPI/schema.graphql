@@ -20,6 +20,7 @@ type Besturen @model {
   quaestor: String!
   abactis: String!
   assessor: String
+  abmail: String
 }
 
 type Playback @model {
@@ -34,4 +35,14 @@ type GalaAanwezigen @model {
   id: ID!
   year: Int!
   names: String!
+}
+
+type Overig @model {
+  id: ID!
+  dkcpraeses: String
+  dkcpraesesemail: String
+  dkcpraesesnummer: String
+  dkcquaestor: String
+  dkcquaestoremail: String
+  dkcquaestornummer: String
 }

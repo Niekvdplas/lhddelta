@@ -73,6 +73,7 @@ export const getBesturen = /* GraphQL */ `
       quaestor
       abactis
       assessor
+      abmail
       createdAt
       updatedAt
     }
@@ -93,6 +94,7 @@ export const listBesturens = /* GraphQL */ `
         quaestor
         abactis
         assessor
+        abmail
         createdAt
         updatedAt
       }
@@ -155,6 +157,43 @@ export const listGalaAanwezigens = /* GraphQL */ `
         id
         year
         names
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getOverig = /* GraphQL */ `
+  query GetOverig($id: ID!) {
+    getOverig(id: $id) {
+      id
+      dkcpraeses
+      dkcpraesesemail
+      dkcpraesesnummer
+      dkcquaestor
+      dkcquaestoremail
+      dkcquaestornummer
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listOverigs = /* GraphQL */ `
+  query ListOverigs(
+    $filter: ModelOverigFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listOverigs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        dkcpraeses
+        dkcpraesesemail
+        dkcpraesesnummer
+        dkcquaestor
+        dkcquaestoremail
+        dkcquaestornummer
         createdAt
         updatedAt
       }

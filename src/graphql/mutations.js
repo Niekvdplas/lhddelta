@@ -104,6 +104,7 @@ export const createBesturen = /* GraphQL */ `
       quaestor
       abactis
       assessor
+      abmail
       createdAt
       updatedAt
     }
@@ -122,6 +123,7 @@ export const updateBesturen = /* GraphQL */ `
       quaestor
       abactis
       assessor
+      abmail
       createdAt
       updatedAt
     }
@@ -140,6 +142,7 @@ export const deleteBesturen = /* GraphQL */ `
       quaestor
       abactis
       assessor
+      abmail
       createdAt
       updatedAt
     }
@@ -230,6 +233,60 @@ export const deleteGalaAanwezigen = /* GraphQL */ `
       id
       year
       names
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createOverig = /* GraphQL */ `
+  mutation CreateOverig(
+    $input: CreateOverigInput!
+    $condition: ModelOverigConditionInput
+  ) {
+    createOverig(input: $input, condition: $condition) {
+      id
+      dkcpraeses
+      dkcpraesesemail
+      dkcpraesesnummer
+      dkcquaestor
+      dkcquaestoremail
+      dkcquaestornummer
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateOverig = /* GraphQL */ `
+  mutation UpdateOverig(
+    $input: UpdateOverigInput!
+    $condition: ModelOverigConditionInput
+  ) {
+    updateOverig(input: $input, condition: $condition) {
+      id
+      dkcpraeses
+      dkcpraesesemail
+      dkcpraesesnummer
+      dkcquaestor
+      dkcquaestoremail
+      dkcquaestornummer
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteOverig = /* GraphQL */ `
+  mutation DeleteOverig(
+    $input: DeleteOverigInput!
+    $condition: ModelOverigConditionInput
+  ) {
+    deleteOverig(input: $input, condition: $condition) {
+      id
+      dkcpraeses
+      dkcpraesesemail
+      dkcpraesesnummer
+      dkcquaestor
+      dkcquaestoremail
+      dkcquaestornummer
       createdAt
       updatedAt
     }

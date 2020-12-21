@@ -60,6 +60,7 @@ export default function TeamSection() {
   
   return (
     <div className={classes.section}>
+      <h4 className={classes.smallTitle}>Welkom op de site van het Leidsch Heerendispuut Delta. <br /> Op deze site vindt u alle informatie over onze bezigheden en ons actief ledenbestand.</h4>
       <h2 className={classes.title}>Het h.t. zetelende {data != undefined ? data.name : null} </h2>
       <div>
         <GridContainer>
@@ -110,7 +111,22 @@ export default function TeamSection() {
                 <small className={classes.smallTitle}>Assessor</small>
               </h4>
             </Card>
-          </GridItem>
+          </GridItem>          
+        </GridContainer>
+      </div>
+      <div>
+      <GridContainer justify="center">
+          <GridItem xs={12} sm={12} md={3}>
+            <Card plain>
+              <h4 className={classes.cardTitle}>
+              Abactiaat der L.H.D. Delta:
+              </h4>
+                <br />
+                <h5>{data != undefined ? data.abactis : null}</h5>
+                <h5>{data != undefined ? data.abmail : null}</h5>
+
+            </Card>
+          </GridItem>          
         </GridContainer>
       </div>
     </div>

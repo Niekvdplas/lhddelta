@@ -36,6 +36,7 @@ import { EmojiEvents, Filter1, Filter2, Filter3, Filter4, Filter5Outlined, Filte
 import { listPlaybacks } from "graphql/queries";
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import { listBesturens } from "graphql/queries";
+import { getOverig } from "graphql/queries";
 
 const useStyles = makeStyles(styles);
 
@@ -49,7 +50,7 @@ export default function VapPage(props) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-  var k = {abactis: "", dkc: {praeses: "", quaestor: "", praesesemail: "", quaestoremail: "", praesesnummer: "", quaestornummer: ""}, bestuur: ""}
+  var k = {abactis: "", dkc: {dkcpraeses: "", dkcquaestor: "", dkcpraesesemail: "", dkcquaestoremail: "", dkcpraesesnummer: "", dkcquaestornummer: ""}, bestuur: ""}
 
   function sortFunction(a, b) {
     if (a.seq_num === b.seq_num) {
@@ -72,7 +73,10 @@ export default function VapPage(props) {
     bestuurlist.sort(sortFunction)
     k.abactis = bestuurlist[0].abactis;
     k.bestuur = bestuurlist[0].name.substr(0, bestuurlist[0].name.lastIndexOf(' '));
-    k.dkc = {praeses: "Alwin van der Linden", quaestor: "Jort Heijne", praesesemail:"test@test.nl", quaestoremail:"test@test.nl", praesesnummer:"06123456789", quaestornummer:"06123456789"}
+    const dkcresp = await API.graphql(graphqlOperation(getOverig, {id: "d1b3e65a-fde3-44f3-b327-afeeba41e8b7"}))
+    const dkc = dkcresp.data.getOverig
+    k.dkc = dkc
+    console.log(k.dkc)
     setData(k);
   }
 
@@ -134,9 +138,9 @@ Met Deltaanse groet,
                           Voor vragen of contact over de VAPs, het dispuut of aangelegenheden waar geschroefd wordt, schroom niet om te bellen of mailen naar:
                           <br />
                           <br />
-                          {data.dkc != undefined ? data.dkc.praeses : null}: {data.dkc != undefined ? data.dkc.praesesnummer : null} / {data.dkc != undefined ? data.dkc.praesesemail : null}
+                          {data.dkc != undefined ? data.dkc.dkcpraeses : null}: {data.dkc != undefined ? data.dkc.dkcpraesesnummer : null} / {data.dkc != undefined ? data.dkc.dkcpraesesemail : null}
                           <br />
-                          {data.dkc != undefined ? data.dkc.quaestor : null}: {data.dkc != undefined ? data.dkc.quaestornummer : null} / {data.dkc != undefined ? data.dkc.quaestoremail : null}
+                          {data.dkc != undefined ? data.dkc.dkcquaestor : null}: {data.dkc != undefined ? data.dkc.dkcquaestornummer : null} / {data.dkc != undefined ? data.dkc.dkcquaestoremail : null}
                         </p>
                       )
                     },
