@@ -70,6 +70,10 @@ export const getBesturen = /* GraphQL */ `
       seq_num
       name
       praeses
+      pfoto
+      qfoto
+      abfoto
+      assfoto
       quaestor
       abactis
       assessor
@@ -91,6 +95,10 @@ export const listBesturens = /* GraphQL */ `
         seq_num
         name
         praeses
+        pfoto
+        qfoto
+        abfoto
+        assfoto
         quaestor
         abactis
         assessor

@@ -80,6 +80,10 @@ export const onCreateBesturen = /* GraphQL */ `
       seq_num
       name
       praeses
+      pfoto
+      qfoto
+      abfoto
+      assfoto
       quaestor
       abactis
       assessor
@@ -96,6 +100,10 @@ export const onUpdateBesturen = /* GraphQL */ `
       seq_num
       name
       praeses
+      pfoto
+      qfoto
+      abfoto
+      assfoto
       quaestor
       abactis
       assessor
@@ -112,6 +120,10 @@ export const onDeleteBesturen = /* GraphQL */ `
       seq_num
       name
       praeses
+      pfoto
+      qfoto
+      abfoto
+      assfoto
       quaestor
       abactis
       assessor

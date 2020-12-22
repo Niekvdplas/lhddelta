@@ -57,7 +57,8 @@ export default function TeamSection() {
     setData(besturenlist[0]);
   }
 
-  
+
+
   return (
     <div className={classes.section}>
       <h4 className={classes.smallTitle}>Welkom op de site van het Leidsch Heerendispuut Delta. <br /> Op deze site vindt u alle informatie over onze bezigheden en ons actief ledenbestand.</h4>
@@ -67,7 +68,7 @@ export default function TeamSection() {
           <GridItem xs={12} sm={12} md={3}>
             <Card plain>
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                <img src={team1} alt="..." className={imageClasses} />
+                <img src={data != undefined ? data.pfoto : null} alt="..." className={imageClasses} />
               </GridItem>
               <h4 className={classes.cardTitle}>
                 {data != undefined ? data.praeses : null}
@@ -79,7 +80,7 @@ export default function TeamSection() {
           <GridItem xs={12} sm={12} md={3}>
             <Card plain>
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                <img src={team1} alt="..." className={imageClasses} />
+                <img src={data != undefined ? data.qfoto : null} alt="..." className={imageClasses} />
               </GridItem>
               <h4 className={classes.cardTitle}>
               {data != undefined ? data.quaestor : null}
@@ -91,7 +92,7 @@ export default function TeamSection() {
           <GridItem xs={12} sm={12} md={3}>
             <Card plain>
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                <img src={team2} alt="..." className={imageClasses} />
+                <img src={data != undefined ? data.abfoto : null} alt="..." className={imageClasses} />
               </GridItem>
               <h4 className={classes.cardTitle}>
               {data != undefined ? data.abactis : null}
@@ -103,7 +104,7 @@ export default function TeamSection() {
           <GridItem xs={12} sm={12} md={3}>
             <Card plain>
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                <img src={team3} alt="..." className={imageClasses} />
+                <img src={data != undefined ? data.assfoto : null} alt="..." className={imageClasses} />
               </GridItem>
               <h4 className={classes.cardTitle}>
               {data != undefined ? data.assessor : null}

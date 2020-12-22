@@ -16,5 +16,19 @@
         }
       }
     }
+  },
+  "auth": {
+    "lhddeltab39e5ee8": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {
+    "lhddeltas3": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

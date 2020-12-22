@@ -17,6 +17,10 @@ type Besturen @model {
   seq_num: Int
   name: String!
   praeses: String!
+  pfoto: String
+  qfoto: String
+  abfoto: String
+  assfoto: String
   quaestor: String!
   abactis: String!
   assessor: String
