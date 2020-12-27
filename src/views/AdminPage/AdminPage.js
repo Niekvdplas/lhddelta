@@ -117,14 +117,14 @@ export default function AdminPage(props) {
   };
 
   const postBestuur = async () => {
-    if(authenticate){
+    if(authenticate()){
       const post = await API.graphql(graphqlOperation(createBesturen, {input: bestuur}));
       window.location.href = '../';
     }
   }
 
   const updateDKC = async () => {
-    if(authenticate){
+    if(authenticate()){
       const update = await API.graphql(graphqlOperation(updateOverig, {input: dkc}));
       window.location.href = '../';
     }
@@ -139,14 +139,16 @@ export default function AdminPage(props) {
   };
 
   const getYear = async () => {
-    getJaren()
-    for (var i in jarenlist) {
-      if(jarenlist[i].year == year){
-        var lijstje = jarenlist[i].members.split(';')
-        lijstje.pop()
-        jarenlist[i].members = lijstje;
-        setjaarleden(jarenlist[i])
-        return;
+    if(authenticate()){
+      getJaren()
+      for (var i in jarenlist) {
+        if(jarenlist[i].year == year){
+          var lijstje = jarenlist[i].members.split(';')
+          lijstje.pop()
+          jarenlist[i].members = lijstje;
+          setjaarleden(jarenlist[i])
+          return;
+        }
       }
     }
   }
