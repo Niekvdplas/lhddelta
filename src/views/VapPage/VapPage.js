@@ -119,7 +119,7 @@ De DKC, oftewel de Delta Kennismakingscommissie, verzorgt alle VAP’s. Voor vra
 <br />
 Met Deltaanse groet,
 <br />
-{data.abactis != undefined ? data.abactis : null}, Ab-Actis van het {data.bestuur != undefined ? data.bestuur : null} der L.H.D. DELTA
+{data.abactis != undefined ? data.abactis : null}, Abactis van het {data.bestuur != undefined ? data.bestuur : null} der L.H.D. DELTA
               </p>
             </div>
             <GridContainer justify="center">

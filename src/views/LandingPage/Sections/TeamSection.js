@@ -67,7 +67,7 @@ export default function TeamSection() {
         <GridContainer>
           <GridItem xs={12} sm={12} md={3}>
             <Card plain>
-              <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
+              <GridItem xs={12} sm={12} md={12} className={classes.itemGrid}>
                 <img src={data != undefined ? data.pfoto : null} alt="..." className={imageClasses} />
               </GridItem>
               <h4 className={classes.cardTitle}>
@@ -79,7 +79,7 @@ export default function TeamSection() {
           </GridItem>
           <GridItem xs={12} sm={12} md={3}>
             <Card plain>
-              <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
+              <GridItem xs={12} sm={12} md={12} className={classes.itemGrid}>
                 <img src={data != undefined ? data.qfoto : null} alt="..." className={imageClasses} />
               </GridItem>
               <h4 className={classes.cardTitle}>
@@ -91,19 +91,19 @@ export default function TeamSection() {
           </GridItem>
           <GridItem xs={12} sm={12} md={3}>
             <Card plain>
-              <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
+              <GridItem xs={12} sm={12} md={12} className={classes.itemGrid}>
                 <img src={data != undefined ? data.abfoto : null} alt="..." className={imageClasses} />
               </GridItem>
               <h4 className={classes.cardTitle}>
               {data != undefined ? data.abactis : null}
                 <br />
-                <small className={classes.smallTitle}>Ab-Actis</small>
+                <small className={classes.smallTitle}>Abactis</small>
               </h4>
             </Card>
           </GridItem>
           <GridItem xs={12} sm={12} md={3}>
             <Card plain>
-              <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
+              <GridItem xs={12} sm={12} md={12} className={classes.itemGrid}>
                 <img src={data != undefined ? data.assfoto : null} alt="..." className={imageClasses} />
               </GridItem>
               <h4 className={classes.cardTitle}>
@@ -117,14 +117,14 @@ export default function TeamSection() {
       </div>
       <div>
       <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={3}>
+          <GridItem xs={12} sm={12} md={6}>
             <Card plain>
-              <h4 className={classes.cardTitle}>
+              <h3 className={classes.cardTitle}>
               Abactiaat der L.H.D. Delta:
-              </h4>
+              </h3>
                 <br />
-                <h5>{data != undefined ? data.abactis : null}</h5>
-                <h5>{data != undefined ? data.abmail : null}</h5>
+                <h4>{data != undefined ? data.abactis : null}</h4>
+                <h4>{data != undefined ? data.abmail : null}</h4>
 
             </Card>
           </GridItem>          

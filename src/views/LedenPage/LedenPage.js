@@ -33,34 +33,34 @@ export default function LedenPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   const [data, setData] = useState("");
   var bestuurData = []
-  setTimeout(function() {
+  setTimeout(function () {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
-  
+
   function sortFunction(a, b) {
     if (a.year === b.year) {
-        return 0;
+      return 0;
     }
     else {
-        return (a.year > b.year) ? -1 : 1;
+      return (a.year > b.year) ? -1 : 1;
     }
   }
 
   useEffect(() => {
-    if(!data){
+    if (!data) {
       getData();
     }
   }, []);
 
-  const getData = async() => {
-    const response = await API.graphql(graphqlOperation(listJarens, {limit: 1000}));
+  const getData = async () => {
+    const response = await API.graphql(graphqlOperation(listJarens, { limit: 1000 }));
     const besturenlist = response.data.listJarens.items;
     besturenlist.sort(sortFunction)
-    for(var i = 0; i < besturenlist.length; i++){
+    for (var i = 0; i < besturenlist.length; i++) {
       var jaar = besturenlist[i]
-      if (besturenlist[i].name == 'I' || besturenlist[i].name == 'II'){
+      if (besturenlist[i].name == 'I' || besturenlist[i].name == 'II') {
         jaar.year += "-" + besturenlist[i].name
         besturenlist[i].name = ""
       }
@@ -69,7 +69,7 @@ export default function LedenPage(props) {
     setData(bestuurData);
   }
 
-  return(
+  return (
     <div>
       <Header
         absolute
@@ -88,18 +88,18 @@ export default function LedenPage(props) {
       >
         <div className={classes.container}>
           <GridContainer justify="center">
-            {data != undefined ? Array.from(data).map(el => 
-            <GridItem xs={12} sm={12} md={4} >
-              <Card className={classes[cardAnimaton]}>
-                <center>
-                <h4><b>{el.year}</b></h4>
-                <h4><b>{el.name}</b></h4>
-                {Array.from(el.members.split(';')).map(lid =>
-                  <h4>{lid}</h4>
-                )}
-                </center>
-              </Card>
-            </GridItem>) : null}
+            {data != undefined ? Array.from(data).map(el =>
+              <GridItem xs={12} sm={12} md={4} >
+                <Card className={classes[cardAnimaton]}>
+                  <center>
+                    <h4><b>{el.year}</b></h4>
+                    <h4><b>{el.name}</b></h4>
+                    {Array.from(el.members.split(';')).map(lid =>
+                      <h4>{lid}</h4>
+                    )}
+                  </center>
+                </Card>
+              </GridItem>) : null}
           </GridContainer>
         </div>
         <Footer whiteFont />
@@ -110,7 +110,7 @@ export default function LedenPage(props) {
 }
 
 
-              {/* <GridContainer justify="center">
+{/* <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={4}>
                   <Card className={classes[cardAnimaton]}>
                     fdsa

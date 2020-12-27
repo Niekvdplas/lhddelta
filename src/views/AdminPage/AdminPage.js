@@ -152,7 +152,7 @@ export default function AdminPage(props) {
   }
 
   const postGalaAttendee = async () => {
-    if(authenticate){
+    if(authenticate()){
       const yearattendees = await API.graphql(graphqlOperation(listGalaAanwezigens));
       const listyears = yearattendees.data.listGalaAanwezigens.items;
       var visited = false;
@@ -185,7 +185,7 @@ export default function AdminPage(props) {
   }
 
   const postwinner = async() => {
-    if(authenticate){
+    if(authenticate()){
       var cancelled = 'f'
       if(dpbwinner == 'afgelast'){
         cancelled = 't'
@@ -204,7 +204,7 @@ export default function AdminPage(props) {
   }
 
   const updateYear = async () => {
-    if(authenticate){
+    if(authenticate()){
       jaarleden.members = getMemberString(jaarleden.members)
       delete jaarleden.createdAt
       delete jaarleden.updatedAt
