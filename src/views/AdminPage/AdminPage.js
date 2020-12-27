@@ -49,7 +49,7 @@ export default function AdminPage(props) {
 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   const [ledenList, setledenList] = useState([{ firstname: "", lastname: "", initials: "" }]);
-  const [bestuur, setBestuur] = useState({id: uuidv4(), name: "", praeses: "", quaestor: "", abactis: "", assessor: "", seq_num: new Date().getFullYear() - 1979});
+  const [bestuur, setBestuur] = useState({id: uuidv4(), name: "", praeses: "", quaestor: "", abactis: "", assessor: "", abmail: "", seq_num: new Date().getFullYear() - 1979});
   const [dkc, setDKC] = useState({id: "d1b3e65a-fde3-44f3-b327-afeeba41e8b7", dkcpraeses: "", dkcquaestor: "", dkcpraesesemail: "", dkcquaestoremail: "", dkcpraesesnummer: "", dkcquaestornummer: ""});
   const [year, setYear] = useState(0);
   const [jarenlist, setjarenlist] = useState([])
@@ -116,8 +116,23 @@ export default function AdminPage(props) {
     setledenList([...ledenList, { firstname: "", lastname: "", initials: "" }]);
   };
 
+  function romanize (num) {
+    if (isNaN(num))
+        return NaN;
+    var digits = String(+num).split(""),
+        key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
+               "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
+               "","I","II","III","IV","V","VI","VII","VIII","IX"],
+        roman = "",
+        i = 3;
+    while (i--)
+        roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+    return Array(+digits.join("") + 1).join("M") + roman;
+}
+
   const postBestuur = async () => {
     if(authenticate()){
+      bestuur.name = romanize(bestuur.seq_num + 1).toString() + "ste Bestuur " + bestuur.praeses.split(' ')[1]
       const post = await API.graphql(graphqlOperation(createBesturen, {input: bestuur}));
       window.location.href = '../';
     }
@@ -133,9 +148,13 @@ export default function AdminPage(props) {
 
   const handleJaarchange = (e, index) => {
     const { name, value } = e.target;
-    const best = jaarleden;
-    jaarleden.members[index] = value;
-    setBestuur(jaarleden);
+    const jaar = jaarleden;
+    if(index == -2){
+      jaar.name = value;
+    }
+    jaar.members[index] = value;
+    console.log(jaar)
+    setjaarleden(jaar);
   };
 
   const getYear = async () => {
@@ -258,7 +277,7 @@ export default function AdminPage(props) {
             <GridItem xs={12} sm={12} md={12}>
               <Card className={classes[cardAnimaton]}>
                   <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>Update data</h4>
+                    <h4>Admin panel</h4>
                   </CardHeader>
                   <NavPills
                     alignCenter
@@ -339,14 +358,14 @@ export default function AdminPage(props) {
                                     )
                                   }}
                                 />
-                                {ledenList.length !== 1 && <button className="mr10" onClick={() => handleRemoveClick(i)}>Remove</button>}
-                                {ledenList.length - 1 === i && <button onClick={handleAddClick}>Add</button>}
+                                {ledenList.length !== 1 && <Button className="mr10" onClick={() => handleRemoveClick(i)}>Verwijder</Button>}
+                                {ledenList.length - 1 === i && <Button onClick={handleAddClick}>Voeg toe</Button>}
                                 </div>     
                                 })}
                             </CardBody>
                             <CardFooter className={classes.cardFooter}>
-                              <Button simple color="primary" size="lg" onClick={postYear}>
-                                Zend nieuw jaar
+                              <Button color="primary" size="lg" onClick={postYear}>
+                                Voeg nieuw jaar toe
                               </Button>
                             </CardFooter>
                           </GridItem>
@@ -358,23 +377,7 @@ export default function AdminPage(props) {
                         tabContent:
                           <GridItem>
                             <CardBody>
-                              <CustomInput
-                                labelText="Naam(ex. XXXIVste Bestuur Heunen)"
-                                id="name"
-                                onChange={e => handleBestuurchange(e, "name")}
-                                formControlProps={{
-                                  fullWidth: true
-                                }}
-                                inputProps={{
-                                  type: "text",
-                                  endAdornment: (
-                                    <InputAdornment position="end">
-                                      <People className={classes.inputIconsColor} />
-                                    </InputAdornment>
-                                  )
-                                }}
-                              />
-                                                            <CustomInput
+                                <CustomInput
                                 labelText="Praeses(ex. G.A. Heunen)"
                                 id="praeses"
                                 onChange={e => handleBestuurchange(e, "praeses")}
@@ -444,9 +447,27 @@ export default function AdminPage(props) {
                                   )
                                 }}
                               />
+                              <CustomInput
+                                labelText="Abactis mailadres"
+                                id="abactis"
+                                onChange={e => handleBestuurchange(e, "abmail")}
+                                formControlProps={{
+                                  fullWidth: true
+                                }}
+                                inputProps={{
+                                  type: "text",
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <Face className={classes.inputIconsColor}>
+                                        lock_outline
+                                                  </Face>
+                                    </InputAdornment>
+                                  )
+                                }}
+                              />
                             </CardBody>
                             <CardFooter className={classes.cardFooter}>
-                              <Button simple color="primary" size="lg" onClick={postBestuur}>
+                              <Button color="primary" size="lg" onClick={postBestuur}>
                                 Zend nieuw bestuur.
                               </Button>
                             </CardFooter>
@@ -564,7 +585,7 @@ export default function AdminPage(props) {
                               />
                             </CardBody>
                             <CardFooter className={classes.cardFooter}>
-                              <Button simple color="primary" size="lg" onClick={updateDKC}>
+                              <Button color="primary" size="lg" onClick={updateDKC}>
                                 Zend nieuw DKC.
                               </Button>
                             </CardFooter>
@@ -577,12 +598,18 @@ export default function AdminPage(props) {
                         <div>
                           <CustomInput id="year" onChange={e => handleInputChange(e, "year", e.target.value)}></CustomInput>
                           <Button onClick={getYear}>
-                            Haal jaar op.
+                            Haal jaar op. (Klik twee keer)
                           </Button>
-                          {jaarleden.members != undefined ? 
-                          jaarleden.members.map((x, i) => 
+                          {jaarleden.members != undefined ?
+                          <div>
+                          <CustomInput id={-1} labelText={jaarleden.name} onChange={e => handleJaarchange(e, -2)}></CustomInput>
+                          {jaarleden.members.map((x, i) =>
+                          <div> 
                             <CustomInput id={i} labelText={x} onChange={e => handleJaarchange(e, i)}></CustomInput>
-                          )
+                            <br />
+                          </div>
+                          )}
+                          </div>
                           : null}
                           <Button onClick={updateYear}>Update jaar</Button>
                         </div>
