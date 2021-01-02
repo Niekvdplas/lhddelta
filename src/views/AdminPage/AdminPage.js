@@ -135,14 +135,14 @@ export default function AdminPage(props) {
       var index = bestuur.praeses.indexOf(' ')
       bestuur.name = romanize(bestuur.seq_num + 1).toString() + "ste Bestuur " + bestuur.praeses.slice(index + 1)
       const post = await API.graphql(graphqlOperation(createBesturen, {input: bestuur}));
-      window.location.href = '../';
+      window.location.href = '/deltaadmin';
     }
   }
 
   const updateDKC = async () => {
     if(authenticate()){
       const update = await API.graphql(graphqlOperation(updateOverig, {input: dkc}));
-      window.location.href = '../';
+      window.location.href = '/deltaadmin';
     }
   }
 
@@ -202,7 +202,6 @@ export default function AdminPage(props) {
         var k = {id: uuidv4(), names: galaattendee, year: galayear}
         const post = await API.graphql(graphqlOperation(createGalaAanwezigen, {input: k}))
       }
-      window.location.href = '../';
     }
   }
 
@@ -213,7 +212,7 @@ export default function AdminPage(props) {
         cancelled = 't'
       }
       const post = await API.graphql(graphqlOperation(createPlayback, {input: {id: uuidv4(), cancelled: cancelled, winner: dpbwinner, year: new Date().getFullYear()}}))
-      window.location.href = '../';
+      window.location.href = '/deltaadmin';
     }
   }
 
@@ -231,7 +230,7 @@ export default function AdminPage(props) {
       delete jaarleden.createdAt
       delete jaarleden.updatedAt
       const update = await API.graphql(graphqlOperation(updateJaren, {input: jaarleden}));
-      window.location.href = '../';
+      window.location.href = '/deltaadmin';
     }
   }
   
@@ -251,7 +250,7 @@ export default function AdminPage(props) {
       newYear.members = memberstring;
       newYear.year = year;
       const postnewYear = await API.graphql(graphqlOperation(createJaren, {input: newYear}))
-      window.location.href = '../';
+      window.location.href = '/deltaadmin';
     }
   };
 
