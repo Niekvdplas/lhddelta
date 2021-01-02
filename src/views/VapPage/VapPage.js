@@ -133,7 +133,7 @@ Met Deltaanse groet,
                       tabIcon: Group,
                       tabContent: (
                         <p>
-                          De Delta Kennismakings Commissie {new Date().getFullYear()} bestaat dit jaar uit {data.dkc != undefined ? data.dkc.praeses : null} en {data.dkc != undefined ? data.dkc.quaestor : null}
+                          De Delta Kennismakings Commissie {new Date().getFullYear()} bestaat dit jaar uit {data.dkc != undefined ? data.dkc.dkcpraeses : null} en {data.dkc != undefined ? data.dkc.dkcquaestor : null}
                           <br />
                           Voor vragen of contact over de VAPs, het dispuut of aangelegenheden waar geschroefd wordt, schroom niet om te bellen of mailen naar:
                           <br />

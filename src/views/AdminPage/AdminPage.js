@@ -132,7 +132,8 @@ export default function AdminPage(props) {
 
   const postBestuur = async () => {
     if(authenticate()){
-      bestuur.name = romanize(bestuur.seq_num + 1).toString() + "ste Bestuur " + bestuur.praeses.split(' ')[1]
+      var index = bestuur.praeses.indexOf(' ')
+      bestuur.name = romanize(bestuur.seq_num + 1).toString() + "ste Bestuur " + bestuur.praeses.slice(index + 1)
       const post = await API.graphql(graphqlOperation(createBesturen, {input: bestuur}));
       window.location.href = '../';
     }

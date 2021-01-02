@@ -6,7 +6,7 @@ to start:
 to build android:
     -npm run build
     -npm install -g @ionic/cli
-    -install @capacitor/core --save
+    -npm install @capacitor/core --save
     -ionic capacitor add android
     -npx cap open android
     -build and export apk
