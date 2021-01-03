@@ -403,9 +403,6 @@ export default function AdminPage(props) {
                             </div>
                             </CardBody>
                             <CardFooter className={classes.cardFooter}>
-                              <Button color="primary" size="lg" onClick={postYear}>
-                                Voeg nieuw jaar toe
-                              </Button>
                             </CardFooter>
                           </GridItem>
                         )
