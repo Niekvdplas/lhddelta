@@ -179,9 +179,11 @@ export const getOverig = /* GraphQL */ `
       dkcpraeses
       dkcpraesesemail
       dkcpraesesnummer
+      dkcpraesesfoto
       dkcquaestor
       dkcquaestoremail
       dkcquaestornummer
+      dkcquaestorfoto
       createdAt
       updatedAt
     }
@@ -199,9 +201,11 @@ export const listOverigs = /* GraphQL */ `
         dkcpraeses
         dkcpraesesemail
         dkcpraesesnummer
+        dkcpraesesfoto
         dkcquaestor
         dkcquaestoremail
         dkcquaestornummer
+        dkcquaestorfoto
         createdAt
         updatedAt
       }

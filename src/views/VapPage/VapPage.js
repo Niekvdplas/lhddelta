@@ -17,6 +17,8 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 import ReactPlayer from "react-player";
+import Card from "components/Card/Card.js";
+
 
 import profile from "assets/img/faces/christian.jpg";
 
@@ -37,6 +39,7 @@ import { listPlaybacks } from "graphql/queries";
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import { listBesturens } from "graphql/queries";
 import { getOverig } from "graphql/queries";
+import { listOverigs } from "graphql/queries";
 
 const useStyles = makeStyles(styles);
 
@@ -50,7 +53,7 @@ export default function VapPage(props) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-  var k = {abactis: "", dkc: {dkcpraeses: "", dkcquaestor: "", dkcpraesesemail: "", dkcquaestoremail: "", dkcpraesesnummer: "", dkcquaestornummer: ""}, bestuur: ""}
+  var k = { abactis: "", dkc: { dkcpraeses: "", dkcquaestor: "", dkcpraesesemail: "", dkcquaestoremail: "", dkcpraesesnummer: "", dkcquaestornummer: "", dkcpraesesfoto: "", dkcquaestorfoto: "" }, bestuur: "" }
 
   function sortFunction(a, b) {
     if (a.seq_num === b.seq_num) {
@@ -62,21 +65,23 @@ export default function VapPage(props) {
   }
 
   useEffect(() => {
-    if(!data || data.link == ""){
+    if (!data || data.link == "") {
       getData();
     }
   }, []);
 
-  const getData = async() => {
-    const response = await API.graphql(graphqlOperation(listBesturens, {limit: 1000}));
+  const getData = async () => {
+    const response = await API.graphql(graphqlOperation(listBesturens, { limit: 1000 }));
     const bestuurlist = response.data.listBesturens.items;
     bestuurlist.sort(sortFunction)
     k.abactis = bestuurlist[0].abactis;
     k.bestuur = bestuurlist[0].name.substr(0, bestuurlist[0].name.lastIndexOf(' '));
-    const dkcresp = await API.graphql(graphqlOperation(getOverig, {id: "d1b3e65a-fde3-44f3-b327-afeeba41e8b7"}))
-    const dkc = dkcresp.data.getOverig
-    k.dkc = dkc
-    console.log(k.dkc)
+    const dkcresp = await API.graphql(graphqlOperation(listOverigs))
+    const dkc = dkcresp.data.listOverigs.items;
+    dkc.sort(function(a,b){
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+    k.dkc = dkc[0]
     setData(k);
   }
 
@@ -119,7 +124,7 @@ De DKC, oftewel de Delta Kennismakingscommissie, verzorgt alle VAP’s. Voor vra
 <br />
 Met Deltaanse groet,
 <br />
-{data.abactis != undefined ? data.abactis : null}, Abactis van het {data.bestuur != undefined ? data.bestuur : null} der L.H.D. DELTA
+                {data.abactis != undefined ? data.abactis : null}, Abactis van het {data.bestuur != undefined ? data.bestuur : null} der L.H.D. DELTA
               </p>
             </div>
             <GridContainer justify="center">
@@ -137,10 +142,34 @@ Met Deltaanse groet,
                           <br />
                           Voor vragen of contact over de VAPs, het dispuut of aangelegenheden waar geschroefd wordt, schroom niet om te bellen of mailen naar:
                           <br />
-                          <br />
-                          {data.dkc != undefined ? data.dkc.dkcpraeses : null}: {data.dkc != undefined ? data.dkc.dkcpraesesnummer : null} / {data.dkc != undefined ? data.dkc.dkcpraesesemail : null}
-                          <br />
-                          {data.dkc != undefined ? data.dkc.dkcquaestor : null}: {data.dkc != undefined ? data.dkc.dkcquaestornummer : null} / {data.dkc != undefined ? data.dkc.dkcquaestoremail : null}
+                          <div>
+                            <GridContainer>
+                              <GridItem xs={12} sm={12} md={6}>
+                                <Card plain>
+                                  <GridItem xs={12} sm={12} md={12} className={classes.itemGrid}>
+                                    <img src={data.dkc != undefined ? data.dkc.dkcpraesesfoto : null} alt="..." className={imageClasses} />
+                                  </GridItem>
+                                  <h4 className={classes.cardTitle}>
+                                    {data != undefined ? data.praeses : null}
+                                    <br />
+                                    <small className={classes.smallTitle}>{data.dkc != undefined ? data.dkc.dkcpraeses : null}: {data.dkc != undefined ? data.dkc.dkcpraesesnummer : null} / {data.dkc != undefined ? data.dkc.dkcpraesesemail : null}</small>
+                                  </h4>
+                                </Card>
+                              </GridItem>
+                              <GridItem xs={12} sm={12} md={6}>
+                                <Card plain>
+                                  <GridItem xs={12} sm={12} md={12} className={classes.itemGrid}>
+                                    <img src={data.dkc != undefined ? data.dkc.dkcquaestorfoto : null} alt="..." className={imageClasses} />
+                                  </GridItem>
+                                  <h4 className={classes.cardTitle}>
+                                    {data != undefined ? data.praeses : null}
+                                    <br />
+                                    <small className={classes.smallTitle}>{data.dkc != undefined ? data.dkc.dkcquaestor : null}: {data.dkc != undefined ? data.dkc.dkcquaestornummer : null} / {data.dkc != undefined ? data.dkc.dkcquaestoremail : null}</small>
+                                  </h4>
+                                </Card>
+                              </GridItem>
+                            </GridContainer>
+                          </div>
                         </p>
                       )
                     },

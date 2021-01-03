@@ -43,6 +43,7 @@ import { createGalaAanwezigen } from "graphql/mutations";
 import { createPlayback } from "graphql/mutations";
 import { updateOverig } from "graphql/mutations";
 import { Storage } from 'aws-amplify';
+import { createOverig } from "graphql/mutations";
 
 const useStyles = makeStyles(styles);
 
@@ -51,7 +52,7 @@ export default function AdminPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   const [ledenList, setledenList] = useState([{ firstname: "", lastname: "", initials: "" }]);
   const [bestuur, setBestuur] = useState({id: uuidv4(), name: "", praeses: "", quaestor: "", abactis: "", assessor: "", abmail: "", seq_num: new Date().getFullYear() - 1979});
-  const [dkc, setDKC] = useState({id: "d1b3e65a-fde3-44f3-b327-afeeba41e8b7", dkcpraeses: "", dkcquaestor: "", dkcpraesesemail: "", dkcquaestoremail: "", dkcpraesesnummer: "", dkcquaestornummer: ""});
+  const [dkc, setDKC] = useState({id: uuidv4(), dkcpraeses: "", dkcquaestor: "", dkcpraesesemail: "", dkcquaestoremail: "", dkcpraesesnummer: "", dkcquaestornummer: "", dkcpraesesfoto: "", dkcquaestorfoto: ""});
   const [year, setYear] = useState(0);
   const [jarenlist, setjarenlist] = useState([])
   const [jaarleden, setjaarleden] = useState([])
@@ -60,6 +61,8 @@ export default function AdminPage(props) {
   const [galaattendee, setgalaattandee] = useState("")
   const [dpbwinner, setdpbwinner] = useState("")
   const [file, setFile] = useState();
+  const [filebestuur, setFilebestuur] = useState([],[],[],[])
+  const [filedkc, setfileDKC] = useState([],[])
   const [uploaded, setUploaded] = useState(false);
 
 
@@ -134,20 +137,47 @@ export default function AdminPage(props) {
     while (i--)
         roman = (key[+digits.pop() + (i * 10)] || "") + roman;
     return Array(+digits.join("") + 1).join("M") + roman;
-}
+  }
+
+  async function uploadbestuurimages(bestuurvar) {
+    var fotoarray = ["pfoto", "qfoto", "abfoto", "assfoto"]
+    for(var i = 0; i < filebestuur.length; i++){
+      var guid = uuidv4().replace(/-/g, '');
+      const storageResult = await Storage.put(guid + '.png', filebestuur[i], {
+        level: 'Bestuur',
+        type: 'image/png'
+      })
+      bestuurvar[fotoarray[i]] = "https://lhddeltas3152449-staging.s3.eu-west-2.amazonaws.com/public/" + guid + ".png"
+    }
+    const post = await API.graphql(graphqlOperation(createBesturen, {input: bestuurvar}));
+  }
+
+  async function uploaddkcimages(dkcvar) {
+    for(var i = 0; i < filedkc.length; i++){
+      var guid = uuidv4().replace(/-/g, '');
+      const storageResult = await Storage.put(guid + '.png', filedkc[i], {
+        level: 'Bestuur',
+        type: 'image/png'
+      })
+      if(i == 0) dkcvar.dkcpraesesfoto = "https://lhddeltas3152449-staging.s3.eu-west-2.amazonaws.com/public/" + guid + ".png"
+      if(i == 1) dkcvar.dkcquaestorfoto = "https://lhddeltas3152449-staging.s3.eu-west-2.amazonaws.com/public/" + guid + ".png"
+    }
+    console.log(dkcvar);
+    const post = await API.graphql(graphqlOperation(createOverig, {input: dkcvar}));
+  }
 
   const postBestuur = async () => {
     if(authenticate()){
       var index = bestuur.praeses.indexOf(' ')
       bestuur.name = romanize(bestuur.seq_num + 1).toString() + "ste Bestuur " + bestuur.praeses.slice(index + 1)
-      const post = await API.graphql(graphqlOperation(createBesturen, {input: bestuur}));
+      await uploadbestuurimages(bestuur)
       window.location.href = '/deltaadmin';
     }
   }
 
   const updateDKC = async () => {
     if(authenticate()){
-      const update = await API.graphql(graphqlOperation(updateOverig, {input: dkc}));
+      await uploaddkcimages(dkc)
       window.location.href = '/deltaadmin';
     }
   }
@@ -220,6 +250,18 @@ export default function AdminPage(props) {
       const post = await API.graphql(graphqlOperation(createPlayback, {input: {id: uuidv4(), cancelled: cancelled, winner: dpbwinner, year: new Date().getFullYear()}}))
       window.location.href = '/deltaadmin';
     }
+  }
+
+  function setBestuurfiles(index, filelid){
+    var k = filebestuur;
+    k[index] = filelid;
+    setFilebestuur(k);
+  }
+
+  function setDkcfiles(index, filedkclid) {
+    var k = filedkc;
+    k[index] = filedkclid;
+    setfileDKC(k);
   }
 
   function getMemberString(members){
@@ -391,7 +433,6 @@ export default function AdminPage(props) {
                                 level: 'public',
                                 type: 'image/png'
                               })
-                              // Insert predictions code here later
                               setUploaded(true)
                               console.log(storageResult);
                             }}}>Upload de foto!</Button>
@@ -426,11 +467,12 @@ export default function AdminPage(props) {
                                     <InputAdornment position="end">
                                       <Face className={classes.inputIconsColor}>
                                         lock_outline
-                                                  </Face>
+                                      </Face>
+                                      <input type="file" onChange={(e) => setBestuurfiles(0, e.target.files[0])} />
                                     </InputAdornment>
                                   )
                                 }}
-                              />
+                              /> 
                               <CustomInput
                                 labelText="Quaestor"
                                 id="quaestor"
@@ -443,6 +485,7 @@ export default function AdminPage(props) {
                                   endAdornment: (
                                     <InputAdornment position="end">
                                       <Face className={classes.inputIconsColor} />
+                                      <input type="file" onChange={(e) => setBestuurfiles(1, e.target.files[0])} />
                                     </InputAdornment>
                                   )
                                 }}
@@ -460,7 +503,8 @@ export default function AdminPage(props) {
                                     <InputAdornment position="end">
                                       <Face className={classes.inputIconsColor}>
                                         lock_outline
-                                                  </Face>
+                                      </Face>
+                                      <input type="file" onChange={(e) => setBestuurfiles(2, e.target.files[0])} />
                                     </InputAdornment>
                                   )
                                 }}
@@ -478,7 +522,8 @@ export default function AdminPage(props) {
                                     <InputAdornment position="end">
                                       <Face className={classes.inputIconsColor}>
                                         lock_outline
-                                                  </Face>
+                                      </Face>
+                                      <input type="file" onChange={(e) => setBestuurfiles(3, e.target.files[0])} />
                                     </InputAdornment>
                                   )
                                 }}
@@ -528,7 +573,8 @@ export default function AdminPage(props) {
                                     <InputAdornment position="end">
                                       <Face className={classes.inputIconsColor}>
                                         lock_outline
-                                                  </Face>
+                                      </Face>
+                                      <input type="file" onChange={(e) => setDkcfiles(0, e.target.files[0])} />
                                     </InputAdornment>
                                   )
                                 }}
@@ -562,12 +608,12 @@ export default function AdminPage(props) {
                                     <InputAdornment position="end">
                                       <Phone className={classes.inputIconsColor}>
                                         lock_outline
-                                                  </Phone>
+                                      </Phone>
                                     </InputAdornment>
                                   )
                                 }}
                               />
-                                                                                        <CustomInput
+                              <CustomInput
                                 labelText="Quaestor"
                                 id="quaestor"
                                 onChange={e => handleDKCchange(e, "dkcquaestor")}
@@ -580,7 +626,8 @@ export default function AdminPage(props) {
                                     <InputAdornment position="end">
                                       <Face className={classes.inputIconsColor}>
                                         lock_outline
-                                                  </Face>
+                                      </Face>
+                                      <input type="file" onChange={(e) => setDkcfiles(1, e.target.files[0])} />
                                     </InputAdornment>
                                   )
                                 }}

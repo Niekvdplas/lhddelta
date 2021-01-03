@@ -46,7 +46,9 @@ type Overig @model {
   dkcpraeses: String
   dkcpraesesemail: String
   dkcpraesesnummer: String
+  dkcpraesesfoto: String
   dkcquaestor: String
   dkcquaestoremail: String
   dkcquaestornummer: String
+  dkcquaestorfoto: String
 }

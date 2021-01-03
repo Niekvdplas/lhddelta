@@ -260,9 +260,11 @@ export const createOverig = /* GraphQL */ `
       dkcpraeses
       dkcpraesesemail
       dkcpraesesnummer
+      dkcpraesesfoto
       dkcquaestor
       dkcquaestoremail
       dkcquaestornummer
+      dkcquaestorfoto
       createdAt
       updatedAt
     }
@@ -278,9 +280,11 @@ export const updateOverig = /* GraphQL */ `
       dkcpraeses
       dkcpraesesemail
       dkcpraesesnummer
+      dkcpraesesfoto
       dkcquaestor
       dkcquaestoremail
       dkcquaestornummer
+      dkcquaestorfoto
       createdAt
       updatedAt
     }
@@ -296,9 +300,11 @@ export const deleteOverig = /* GraphQL */ `
       dkcpraeses
       dkcpraesesemail
       dkcpraesesnummer
+      dkcpraesesfoto
       dkcquaestor
       dkcquaestoremail
       dkcquaestornummer
+      dkcquaestorfoto
       createdAt
       updatedAt
     }
