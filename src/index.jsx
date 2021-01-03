@@ -7,6 +7,9 @@ import { Router, Route, Switch } from "react-router-dom";
 import {v4 as uuidv4 } from 'uuid';
 
 import "assets/scss/material-kit-react.scss?v=1.9.0";
+import "react-image-gallery/styles/scss/image-gallery.scss";
+
+import "react-image-gallery/styles/css/image-gallery.css";
 
 // pages for this product
 import Components from "views/Components/Components.js";
@@ -28,6 +31,7 @@ import { createPlayback } from "graphql/mutations";
 import VapPage from "views/VapPage/VapPage";
 import GalaPage from "views/GalaPage/GalaPage";
 import AdminPage from "views/AdminPage/AdminPage";
+import PhotoPage from "views/PhotoPage/PhotoPage";
 
 var hist = createBrowserHistory();
 
@@ -44,6 +48,7 @@ ReactDOM.render(
       <Route path="/vap" component={VapPage} />
       <Route path='/besturen' component={BesturenPage} />
       <Route path='/leden' component={LedenPage} />
+      <Route path='/fotos' component={PhotoPage} />
       <Route path="/" component={LandingPage} />
     </Switch>
   </Router>,

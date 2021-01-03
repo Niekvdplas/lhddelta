@@ -12,7 +12,7 @@ import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 
 // @material-ui/icons
-import { Apps, ChangeHistory, CloudDownload, Face, Grade, PartyMode, SupervisorAccount, Theaters } from "@material-ui/icons";
+import { Apps, ChangeHistory, CloudDownload, Face, Grade, PartyMode, PhotoAlbum, SupervisorAccount, Theaters } from "@material-ui/icons";
 
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
@@ -78,6 +78,15 @@ export default function HeaderLinks(props) {
           className={classes.navLink}
         >
           <Grade className={classes.icons} /> Lustrumgala
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/fotos"
+          color="transparent"
+          className={classes.navLink}
+        >
+          <PhotoAlbum className={classes.icons} /> Foto's
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>

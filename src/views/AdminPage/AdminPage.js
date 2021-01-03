@@ -21,7 +21,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import crypto from "crypto"
 import NavPills from "components/NavPills/NavPills.js";
-import { Cake, EmailOutlined, EmojiEvents, Face, Grade, Group, History, Phone, PlusOne, PublishRounded, Theaters } from "@material-ui/icons";
+import { Cake, EmailOutlined, EmojiEvents, Face, Grade, Group, History, Phone, PhotoAlbum, PlusOne, PublishRounded, Theaters } from "@material-ui/icons";
 import {v4 as uuidv4 } from 'uuid';
 
 
@@ -42,6 +42,7 @@ import { updateGalaAanwezigen } from "graphql/mutations";
 import { createGalaAanwezigen } from "graphql/mutations";
 import { createPlayback } from "graphql/mutations";
 import { updateOverig } from "graphql/mutations";
+import { Storage } from 'aws-amplify';
 
 const useStyles = makeStyles(styles);
 
@@ -58,6 +59,8 @@ export default function AdminPage(props) {
   const [galayear, setgalayear] = useState(0)
   const [galaattendee, setgalaattandee] = useState("")
   const [dpbwinner, setdpbwinner] = useState("")
+  const [file, setFile] = useState();
+  const [uploaded, setUploaded] = useState(false);
 
 
   var newLid = {id: "", last_name: "", full_name: "", initials: ""}
@@ -69,9 +72,12 @@ export default function AdminPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
 
-  function authenticate(){
-    return crypto.createHash('sha512').update(loginpw).digest('hex') == "f35e81da596808cc91e3504818515b2a7d800edb8f168c6e3251fb0fd22b5c373b099629a4c3091e07717174ecb6772ace8100b9b39f422ee5003ab0ba9b9866"
-  }
+  function authenticate(flag = false){
+    if(!flag)
+      return crypto.createHash('sha512').update(loginpw).digest('hex') == "f35e81da596808cc91e3504818515b2a7d800edb8f168c6e3251fb0fd22b5c373b099629a4c3091e07717174ecb6772ace8100b9b39f422ee5003ab0ba9b9866"
+    else
+      return crypto.createHash('sha512').update(loginpw).digest('hex') == "7bff1b9e9102564f27ce7b4947baf4cb3dbdefab2cc6999089d283b0ee13d689facc2c8f4533ef88c814964d038f662c4f056c6638f9b859220eb59ec70df120"  
+    }
 
   const handleInputChange = (e, place, index) => {
     if(place != "year"){
@@ -362,6 +368,39 @@ export default function AdminPage(props) {
                                 {ledenList.length - 1 === i && <Button onClick={handleAddClick}>Voeg toe</Button>}
                                 </div>     
                                 })}
+                            </CardBody>
+                            <CardFooter className={classes.cardFooter}>
+                              <Button color="primary" size="lg" onClick={postYear}>
+                                Voeg nieuw jaar toe
+                              </Button>
+                            </CardFooter>
+                          </GridItem>
+                        )
+                      },
+                      {
+                        tabButton: "Upload foto",
+                        tabIcon: PhotoAlbum,
+                        tabContent: (
+                          <GridItem>
+                            <CardBody>
+                            <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+                            <Button onClick={async () => {
+                              if(authenticate(true)){
+                              var guid = uuidv4()
+                              const storageResult = await Storage.put(guid + '.png', file, {
+                                level: 'public',
+                                type: 'image/png'
+                              })
+                              // Insert predictions code here later
+                              setUploaded(true)
+                              console.log(storageResult);
+                            }}}>Upload de foto!</Button>
+
+                            <div>
+                              {uploaded
+                                ? window.location.href = '/deltaadmin'
+                                : <div>Upload een foto...</div>}
+                            </div>
                             </CardBody>
                             <CardFooter className={classes.cardFooter}>
                               <Button color="primary" size="lg" onClick={postYear}>
