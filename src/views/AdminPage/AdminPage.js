@@ -37,7 +37,7 @@ import { createBesturen } from "graphql/mutations";
 import { createLeden } from "graphql/mutations";
 import { createJaren } from "graphql/mutations";
 import { listGalaAanwezigens } from "graphql/queries";
-import { bool } from "prop-types";
+import { bool, number } from "prop-types";
 import { updateGalaAanwezigen } from "graphql/mutations";
 import { createGalaAanwezigen } from "graphql/mutations";
 import { createPlayback } from "graphql/mutations";
@@ -64,6 +64,7 @@ export default function AdminPage(props) {
   const [filebestuur, setFilebestuur] = useState([],[],[],[])
   const [filedkc, setfileDKC] = useState([],[])
   const [uploaded, setUploaded] = useState(false);
+  const [numberofgenoten, setNumber] = useState("");
 
 
   var newLid = {id: "", last_name: "", full_name: "", initials: ""}
@@ -201,6 +202,7 @@ export default function AdminPage(props) {
           var lijstje = jarenlist[i].members.split(';')
           lijstje.pop()
           jarenlist[i].members = lijstje;
+          setNumber(jarenlist[i].members.length);
           setjaarleden(jarenlist[i])
           return;
         }
@@ -704,6 +706,7 @@ export default function AdminPage(props) {
                             <br />
                           </div>
                           )}
+                          <CustomInput id={numberofgenoten} labelText="Voeg extra lid toe" onChange={e => handleJaarchange(e, numberofgenoten)}></CustomInput>
                           </div>
                           : null}
                           <Button onClick={updateYear}>Update jaar</Button>
