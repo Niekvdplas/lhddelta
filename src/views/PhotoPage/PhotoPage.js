@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // @material-ui/core components
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -49,7 +49,7 @@ const useStyles = makeStyles(styles);
 
 export default function PhotoPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  const [images, setImages] = React.useState([{original:"", thumbnail:""}]);
+  const [images, setImages] = React.useState([]);
 
   setTimeout(function () {
     setCardAnimation("");
@@ -75,7 +75,11 @@ export default function PhotoPage(props) {
     setImages(res)
   }
 
-  listResult();
+  useEffect(() => {
+    if (images.length == 0) {
+      listResult();
+    }
+  }, []);
 
   return (
     <div>
