@@ -190,7 +190,6 @@ export default function AdminPage(props) {
       jaar.name = value;
     }
     jaar.members[index] = value;
-    console.log(jaar)
     setjaarleden(jaar);
   };
 
@@ -264,10 +263,23 @@ export default function AdminPage(props) {
     setfileDKC(k);
   }
 
+  function sortMembers(members){
+    return members.sort(function(a, b){
+      if(a.split(' ').slice(-2, -1)[0] < b.split(' ').slice(-2, -1)[0]){
+        return -1;
+      } else {
+        return 1;
+      }
+    })
+  }
+
   function getMemberString(members){
     var returnstring = ""
+    sortMembers(members);
     for(var i = 0; i < members.length; i++){
-      returnstring += members[i] + ";"
+      if(members[i] != " " || members[i] != ""){
+        returnstring += members[i] + ";"
+      }
     }
     return returnstring
   }
