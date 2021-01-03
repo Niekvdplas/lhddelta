@@ -95,7 +95,7 @@ export default function PhotoPage(props) {
         }}
       >
         <div className={classes.container}>
-          <ImageGallery items={images} />;
+          <ImageGallery items={images} />
         </div>
         <Footer whiteFont />
       </div>
