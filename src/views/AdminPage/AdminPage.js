@@ -490,11 +490,11 @@ export default function AdminPage(props) {
                                       <Face className={classes.inputIconsColor}>
                                         lock_outline
                                       </Face>
-                                      <input type="file" onChange={(e) => setBestuurfiles(0, e.target.files[0])} />
                                     </InputAdornment>
                                   )
                                 }}
-                              /> 
+                              />
+                              <input type="file" onChange={(e) => setBestuurfiles(0, e.target.files[0])} /> 
                               <CustomInput
                                 labelText="Quaestor"
                                 id="quaestor"
@@ -507,11 +507,11 @@ export default function AdminPage(props) {
                                   endAdornment: (
                                     <InputAdornment position="end">
                                       <Face className={classes.inputIconsColor} />
-                                      <input type="file" onChange={(e) => setBestuurfiles(1, e.target.files[0])} />
                                     </InputAdornment>
                                   )
                                 }}
                               />
+                              <input type="file" onChange={(e) => setBestuurfiles(1, e.target.files[0])} />
                               <CustomInput
                                 labelText="Abactis"
                                 id="abactis"
@@ -526,12 +526,13 @@ export default function AdminPage(props) {
                                       <Face className={classes.inputIconsColor}>
                                         lock_outline
                                       </Face>
-                                      <input type="file" onChange={(e) => setBestuurfiles(2, e.target.files[0])} />
+                                      
                                     </InputAdornment>
                                   )
                                 }}
                               />
-                                                            <CustomInput
+                              <input type="file" onChange={(e) => setBestuurfiles(2, e.target.files[0])} />
+                              <CustomInput
                                 labelText="Assessor"
                                 id="assessor"
                                 onChange={e => handleBestuurchange(e, "assessor")}
@@ -545,11 +546,12 @@ export default function AdminPage(props) {
                                       <Face className={classes.inputIconsColor}>
                                         lock_outline
                                       </Face>
-                                      <input type="file" onChange={(e) => setBestuurfiles(3, e.target.files[0])} />
+                                      
                                     </InputAdornment>
                                   )
                                 }}
                               />
+                              <input type="file" onChange={(e) => setBestuurfiles(3, e.target.files[0])} />
                               <CustomInput
                                 labelText="Abactis mailadres"
                                 id="abactis"
@@ -596,11 +598,11 @@ export default function AdminPage(props) {
                                       <Face className={classes.inputIconsColor}>
                                         lock_outline
                                       </Face>
-                                      <input type="file" onChange={(e) => setDkcfiles(0, e.target.files[0])} />
                                     </InputAdornment>
                                   )
                                 }}
                               />
+                              <input type="file" onChange={(e) => setDkcfiles(0, e.target.files[0])} />
                               <CustomInput
                                 labelText="Praeses email"
                                 id="dkcpraesesemail"
@@ -649,11 +651,12 @@ export default function AdminPage(props) {
                                       <Face className={classes.inputIconsColor}>
                                         lock_outline
                                       </Face>
-                                      <input type="file" onChange={(e) => setDkcfiles(1, e.target.files[0])} />
+                                      
                                     </InputAdornment>
                                   )
                                 }}
                               />
+                              <input type="file" onChange={(e) => setDkcfiles(1, e.target.files[0])} />
                               <CustomInput
                                 labelText="Quaestor email"
                                 id="dkcquaestoremail"
