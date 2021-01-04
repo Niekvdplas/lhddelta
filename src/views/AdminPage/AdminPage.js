@@ -267,10 +267,18 @@ export default function AdminPage(props) {
 
   function sortMembers(members){
     return members.sort(function(a, b){
-      if(a.split(' ').slice(-2, -1)[0] < b.split(' ').slice(-2, -1)[0]){
-        return -1;
+      if(a.split(' ').slice(-1)[0].includes('(')){
+        if(a.split(' ').slice(-2, -1)[0] < b.split(' ').slice(-2, -1)[0]){
+          return -1;
+        } else {
+          return 1;
+        }
       } else {
-        return 1;
+        if(a.split(' ').slice(-1)[0] < b.split(' ').slice(-1)[0]){
+          return -1;
+        } else {
+          return 1;
+        }
       }
     })
   }
