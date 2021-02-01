@@ -58,13 +58,29 @@ export default function LedenPage(props) {
     const response = await API.graphql(graphqlOperation(listJarens, { limit: 1000 }));
     const besturenlist = response.data.listJarens.items;
     besturenlist.sort(sortFunction)
+    var jarenGeweest = []
+    var incidences = 0;
+    var flag = false;
     for (var i = 0; i < besturenlist.length; i++) {
       var jaar = besturenlist[i]
-      if (besturenlist[i].name == 'I' || besturenlist[i].name == 'II') {
-        jaar.year += "-" + besturenlist[i].name
-        besturenlist[i].name = ""
+      if(jarenGeweest.includes(jaar.year)){
+        console.log(jarenGeweest.indexOf(jaar.year));
+        console.log(bestuurData)
+        bestuurData[jarenGeweest.indexOf(jaar.year) + incidences].year += "-I"
+        incidences += 1
+        jaar.year += "-II"
+        flag = true
+      } else {
+        jarenGeweest.push(jaar.year)
       }
-      bestuurData.push(jaar);
+      if(flag){
+        var switchelem = bestuurData.pop();
+        bestuurData.push(jaar);
+        bestuurData.push(switchelem);
+        flag = false
+      } else{
+        bestuurData.push(jaar);
+      }
     }
     setData(bestuurData);
   }
