@@ -64,8 +64,6 @@ export default function LedenPage(props) {
     for (var i = 0; i < besturenlist.length; i++) {
       var jaar = besturenlist[i]
       if(jarenGeweest.includes(jaar.year)){
-        console.log(jarenGeweest.indexOf(jaar.year));
-        console.log(bestuurData)
         bestuurData[jarenGeweest.indexOf(jaar.year) + incidences].year += "-I"
         incidences += 1
         jaar.year += "-II"

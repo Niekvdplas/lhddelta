@@ -163,7 +163,6 @@ export default function AdminPage(props) {
       if(i == 0) dkcvar.dkcpraesesfoto = "https://lhddeltas3152449-staging.s3.eu-west-2.amazonaws.com/public/" + guid + ".png"
       if(i == 1) dkcvar.dkcquaestorfoto = "https://lhddeltas3152449-staging.s3.eu-west-2.amazonaws.com/public/" + guid + ".png"
     }
-    console.log(dkcvar);
     const post = await API.graphql(graphqlOperation(createOverig, {input: dkcvar}));
   }
 
@@ -456,7 +455,6 @@ export default function AdminPage(props) {
                                 type: 'image/png'
                               })
                               setUploaded(true)
-                              console.log(storageResult);
                             }}}>Upload de foto!</Button>
 
                             <div>
