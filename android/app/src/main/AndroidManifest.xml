@@ -45,7 +45,10 @@
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Camera, Photos, input file -->
+    <!-- Geolocation API -->
     <!-- Network API -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <!-- Navigator.getUserMedia -->
+    <!-- Video -->
 </manifest>
