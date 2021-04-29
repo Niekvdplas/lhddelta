@@ -108,6 +108,8 @@ export default function DpbPage(props) {
               Elk jaar wordt er bij onze manifestatie, de Playbackshow, een filmpje gemaakt. Dit filmpje is speciaal gemaakt voor de editie van onze show in 2018.
               <br />
               Dit jaar wordt de Delta Playbackshow gehouden op 5 augustus bij Thuishaven, Amsterdam.
+              <br />
+              Koop <a href="https://deltaplayback.leidshart.nl/">hier</a> je kaarten!
               </p>
                 <InstagramEmbed
                   url='https://www.instagram.com/p/COQLptNA9cV'

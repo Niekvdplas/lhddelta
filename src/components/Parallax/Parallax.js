@@ -16,7 +16,7 @@ export default function Parallax(props) {
   if (window.innerWidth >= 768) {
     windowScrollTop = window.pageYOffset / 3;
   } else {
-    windowScrollTop = 0;
+    windowScrollTop = -10;
   }
   const [transform, setTransform] = React.useState(
     "translate3d(0," + windowScrollTop + "px,0)"
