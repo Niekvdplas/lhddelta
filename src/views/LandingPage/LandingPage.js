@@ -14,6 +14,8 @@ import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
+import InstagramEmbed from 'react-instagram-embed';
+
 
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 
@@ -60,6 +62,20 @@ export default function LandingPage(props) {
                 Bekijk de video over de Delta Playback
               </Button>
             </GridItem>
+            <GridItem xs={12} sm={12} md={6}>
+            <InstagramEmbed
+                  url='https://www.instagram.com/p/COQLptNA9cV'
+                  clientAccessToken='174492614538930|b2a74e4a79bb37a2a2b8c16d5bc3c6ee'
+                  maxWidth={800}
+                  hideCaption={true}
+                  protocol=''
+                  injectScript
+                  onLoading={() => {}}
+                  onSuccess={() => {}}
+                  onAfterRender={() => {}}
+                  onFailure={() => {}}
+                />
+              </GridItem>
           </GridContainer>
         </div>
       </Parallax>

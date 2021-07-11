@@ -17,6 +17,7 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 import ReactPlayer from "react-player";
+import InstagramEmbed from 'react-instagram-embed';
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { EmojiEvents, History } from "@material-ui/icons";
@@ -102,12 +103,29 @@ export default function DpbPage(props) {
                 </div>
                 </div>
               </GridItem>
-            </GridContainer>
             <div className={classes.description}>
               <p>
-              Elk jaar wordt er bij onze manifestatie, de Playbackshow, een filmpje gemaakt. Dit filmpje is speciaal gemaakt voor de laatste editie van onze show.
+              Elk jaar wordt er bij onze manifestatie, de Playbackshow, een filmpje gemaakt. Dit filmpje is speciaal gemaakt voor de editie van onze show in 2018.
+              <br />
+              Dit jaar wordt de Delta Playbackshow gehouden op 5 augustus bij Thuishaven, Amsterdam.
+              <br />
+              Koop <a href="https://deltaplayback.leidshart.nl/">hier</a> je kaarten!
               </p>
+                <InstagramEmbed
+                  url='https://www.instagram.com/p/COQLptNA9cV'
+                  clientAccessToken='174492614538930|b2a74e4a79bb37a2a2b8c16d5bc3c6ee'
+                  maxWidth={800}
+                  hideCaption={false}
+                  protocol=''
+                  injectScript
+                  onLoading={() => {}}
+                  onSuccess={() => {}}
+                  onAfterRender={() => {}}
+                  onFailure={() => {}}
+                />
             </div>
+            </GridContainer>
+
             <GridContainer justify="center" id="test">
               <GridItem xs={12} sm={12} md={9} className={classes.navWrapper}>
                 <NavPills
