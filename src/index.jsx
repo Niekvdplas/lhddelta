@@ -44,7 +44,7 @@ ReactDOM.render(
       <Route path="/deltaadmin" component={AdminPage} />
       <Route path="/profile-page" component={ProfilePage} />
       <Route path="/dpb" component={DpbPage} />
-      <Route path="/gala" component={GalaPage} />
+      {new Date().getFullYear() % 5 == 0 ?<Route path="/gala" component={GalaPage} /> : null}
       <Route path="/vap" component={VapPage} />
       <Route path='/besturen' component={BesturenPage} />
       <Route path='/leden' component={LedenPage} />

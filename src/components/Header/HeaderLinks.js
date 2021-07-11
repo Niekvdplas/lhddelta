@@ -71,7 +71,7 @@ export default function HeaderLinks(props) {
           <PartyMode className={classes.icons} /> VAP
           </Button>
       </ListItem>
-      <ListItem className={classes.listItem}>
+      {new Date().getFullYear() % 5 == 0 ? <ListItem className={classes.listItem}>
         <Button
           href="/gala"
           color="transparent"
@@ -79,7 +79,7 @@ export default function HeaderLinks(props) {
         >
           <Grade className={classes.icons} /> Lustrumgala
         </Button>
-      </ListItem>
+      </ListItem> : null}
       <ListItem className={classes.listItem}>
         <Button
           href="/fotos"

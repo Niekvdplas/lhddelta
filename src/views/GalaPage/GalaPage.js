@@ -62,7 +62,7 @@ export default function GalaPage(props) {
     k.aanwezigen.pop()
     for (var i = 0; i < galalist.length; i++) {
       var galaEntry = galalist[i]
-      k.aanwezigen.push({ year: galaEntry.year, names: galaEntry.names.split(";") })
+      if((new Date().getFullYear() - 4) <= galaEntry.createdAt.substring(0, 4) <= new Date().getFullYear()) k.aanwezigen.push({ year: galaEntry.year, names: galaEntry.names.split(";") })
     }
     setData(k);
   }

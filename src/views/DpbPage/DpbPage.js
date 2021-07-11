@@ -111,18 +111,6 @@ export default function DpbPage(props) {
               <br />
               Koop <a href="https://deltaplayback.leidshart.nl/">hier</a> je kaarten!
               </p>
-                <InstagramEmbed
-                  url='https://www.instagram.com/p/COQLptNA9cV'
-                  clientAccessToken='174492614538930|b2a74e4a79bb37a2a2b8c16d5bc3c6ee'
-                  maxWidth={800}
-                  hideCaption={false}
-                  protocol=''
-                  injectScript
-                  onLoading={() => {}}
-                  onSuccess={() => {}}
-                  onAfterRender={() => {}}
-                  onFailure={() => {}}
-                />
             </div>
             </GridContainer>
 
