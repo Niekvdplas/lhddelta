@@ -46,6 +46,57 @@ export const deleteLeden = /* GraphQL */ `
     }
   }
 `;
+export const createVaps = /* GraphQL */ `
+  mutation CreateVaps(
+    $input: CreateVapsInput!
+    $condition: ModelVapsConditionInput
+  ) {
+    createVaps(input: $input, condition: $condition) {
+      id
+      num
+      location
+      date
+      name
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateVaps = /* GraphQL */ `
+  mutation UpdateVaps(
+    $input: UpdateVapsInput!
+    $condition: ModelVapsConditionInput
+  ) {
+    updateVaps(input: $input, condition: $condition) {
+      id
+      num
+      location
+      date
+      name
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteVaps = /* GraphQL */ `
+  mutation DeleteVaps(
+    $input: DeleteVapsInput!
+    $condition: ModelVapsConditionInput
+  ) {
+    deleteVaps(input: $input, condition: $condition) {
+      id
+      num
+      location
+      date
+      name
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createJaren = /* GraphQL */ `
   mutation CreateJaren(
     $input: CreateJarenInput!

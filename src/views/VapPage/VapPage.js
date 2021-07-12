@@ -40,12 +40,14 @@ import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import { listBesturens } from "graphql/queries";
 import { getOverig } from "graphql/queries";
 import { listOverigs } from "graphql/queries";
+import { listVapss } from "graphql/queries";
 
 const useStyles = makeStyles(styles);
 
 export default function VapPage(props) {
   const classes = useStyles();
   const [data, setData] = useState("");
+  const [vaps, setVaps] = useState("");
   const { ...rest } = props;
   const imageClasses = classNames(
     classes.imgRaised,
@@ -83,6 +85,10 @@ export default function VapPage(props) {
     });
     k.dkc = dkc[0]
     setData(k);
+    const responsevaps= await API.graphql(graphqlOperation(listVapss, { limit: 1000 }));
+    setVaps(responsevaps.data.listVapss.items.sort(function(a, b){
+      return a["num"] - b["num"];
+    }));
   }
 
   return (
@@ -178,10 +184,12 @@ Met Deltaanse groet,
                       tabIcon: Filter1,
                       tabContent: (
                         <p>
-                          <h3>TIROLER VAP</h3>
-                          De Bier und Bratwurst VAP is gebaseerd en geïnspireerd op de feesten van onze Duitssprekende en lederhosen dragende vrienden. Kom allen verkleed in Tiroler-outfit en zing mee met Duitse schlagers om vervolgens traditioneel Duitse bierspellen te spelen!
+                          <h3>{vaps[0] != undefined ? vaps[0]["name"].toUpperCase() : null} VAP</h3>
+                          {vaps[0] != undefined ? vaps[0]["description"] : null}
                           <br /><br />
-                        Deze zal plaatsvinden op 12 september in de Singelzaal te Quintus.
+                        De {vaps[0] != undefined ? vaps[0]["name"] : null} VAP zal plaatsvinden op {vaps[0] != undefined ? vaps[0]["date"] : null}.
+                        <br />
+                        Locatie: {vaps[0] != undefined ? vaps[0]["location"] : null}
                         </p>
                       )
                     },
@@ -190,10 +198,12 @@ Met Deltaanse groet,
                       tabIcon: Filter2,
                       tabContent: (
                         <p>
-                          <h3>AMERICAN FRATPARTY VAP</h3>
-                          De American Fratparty is een jaarlijkse traditie van L.H.D. Delta. Ieder jaar wordt, samen met de mooie dames van Vampierelles, bierpong gespeeld, keg stands gedaan & hard gefeest, volledig in Amerikaanse stijl. Kom gekleed in je American Football tenue of je fratboy kleding en party mee.
+                          <h3>{vaps[1] != undefined ? vaps[1]["name"].toUpperCase() : null} VAP</h3>
+                          {vaps[1] != undefined ? vaps[1]["description"] : null}
                           <br /><br />
-                        De Fratparty zal dit jaar plaatsvinden op 15 september en zal op Hooigracht 13 zijn.
+                        De {vaps[1] != undefined ? vaps[1]["name"] : null} zal dit jaar plaatsvinden op {vaps[1] != undefined ? vaps[1]["date"] : null}.
+                        <br />
+                        Locatie: {vaps[1] != undefined ? vaps[1]["location"] : null}
                         </p>
                       )
                     },
@@ -202,10 +212,12 @@ Met Deltaanse groet,
                       tabIcon: Filter3,
                       tabContent: (
                         <p>
-                          <h3>SCHILDER EEN DAME VAP</h3>
-                          Ooit werd Delta na een lange dag varen over de Amsterdamse grachten met het Augustijnse damesdispuut All’ure, omschreven als “simpele gasten”. Om te laten zien dat Delta veel meer dan dat is zal dit jaar de Schilder een Dame VAP haar primeur doen. Maak kennis met het vernuft van de leden in het restaurant van Quintus, waarna de prachtige Victoria’s Secret modellen nog eens beter bekeken zullen worden uiteraard onder het genot van een biertje.
+                          <h3>{vaps[2] != undefined ? vaps[2]["name"].toUpperCase() : null} VAP</h3>
+                          {vaps[2] != undefined ? vaps[2]["description"] : null}
                           <br /><br />
-                        De Schilder een Dame VAP zal dit jaar op 18 september plaatsvinden.
+                        De {vaps[2] != undefined ? vaps[2]["name"] : null} VAP zal dit jaar op {vaps[2] != undefined ? vaps[2]["date"] : null} plaatsvinden.
+                        <br />
+                        Locatie: {vaps[2] != undefined ? vaps[2]["location"] : null}
                         </p>
                       )
                     },
@@ -214,11 +226,12 @@ Met Deltaanse groet,
                       tabIcon: Filter4,
                       tabContent: (
                         <p>
-                          <h3>BBQ VAP</h3>
-
-                          Kom lekker een satétje, worstje of hamburger eten op de Delta BBQ VAP, dit alles onder genot van het gouden godenvocht dat ons studentenleven tekent. Een mooie VAP om Deltanen eens goed te spreken en leren kennen.
+                          <h3>{vaps[3] != undefined ? vaps[3]["name"].toUpperCase() : null} VAP</h3>
+                          {vaps[3] != undefined ? vaps[3]["description"] : null}
                           <br /><br />
-                        De BBQ VAP zal dit jaar plaatsvinden op 23 september.
+                        De {vaps[3] != undefined ? vaps[3]["name"] : null} VAP zal dit jaar plaatsvinden op {vaps[3] != undefined ? vaps[3]["date"] : null}.
+                        <br />
+                        Locatie: {vaps[3] != undefined ? vaps[3]["location"] : null}
                         </p>
                       )
                     },
@@ -227,12 +240,12 @@ Met Deltaanse groet,
                       tabIcon: Filter5Rounded,
                       tabContent:
                         <p>
-                          <h3>TRADITIONES VAP</h3>
-                          Delta is een van de oudste disputen van Quintus, opgericht in 1979. Het kan dan haast ook niet anders dan dat het dispuut vele tradities rijk is. Tijdens de Traditiones VAP zul je alle tradities van L.H.D. Delta leren kennen, kom daarom ook traditioneel in jasje-dasje gekleed.
-                          <br />
-                          Delendum Est Longae Traditiones Animo !
+                          <h3>{vaps[4] != undefined ? vaps[4]["name"].toUpperCase() : null} VAP</h3>
+                          {vaps[4] != undefined ? vaps[4]["description"] : null}
                           <br /><br />
-                          De Traditiones VAP zal dit jaar plaatsvinden op 26 september.
+                          De {vaps[4] != undefined ? vaps[4]["name"] : null} VAP zal dit jaar plaatsvinden op {vaps[4] != undefined ? vaps[4]["date"] : null}.
+                          <br />
+                        Locatie: {vaps[4] != undefined ? vaps[4]["location"] : null}
                         </p>
                     }
                   ]}

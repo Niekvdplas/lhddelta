@@ -37,6 +37,48 @@ export const onDeleteLeden = /* GraphQL */ `
     }
   }
 `;
+export const onCreateVaps = /* GraphQL */ `
+  subscription OnCreateVaps {
+    onCreateVaps {
+      id
+      num
+      location
+      date
+      name
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateVaps = /* GraphQL */ `
+  subscription OnUpdateVaps {
+    onUpdateVaps {
+      id
+      num
+      location
+      date
+      name
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteVaps = /* GraphQL */ `
+  subscription OnDeleteVaps {
+    onDeleteVaps {
+      id
+      num
+      location
+      date
+      name
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateJaren = /* GraphQL */ `
   subscription OnCreateJaren {
     onCreateJaren {

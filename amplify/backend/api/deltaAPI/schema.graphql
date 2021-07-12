@@ -5,6 +5,15 @@ type Leden @model {
   full_name: String
 }
 
+type Vaps @model {
+  id: ID!
+  num: Int!
+  location: String!
+  date: String!
+  name: String!
+  description: String!
+}
+
 type Jaren @model {
   id: ID!
   members: String!

@@ -32,6 +32,41 @@ export const listLedens = /* GraphQL */ `
     }
   }
 `;
+export const getVaps = /* GraphQL */ `
+  query GetVaps($id: ID!) {
+    getVaps(id: $id) {
+      id
+      num
+      location
+      date
+      name
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listVapss = /* GraphQL */ `
+  query ListVapss(
+    $filter: ModelVapsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listVapss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        num
+        location
+        date
+        name
+        description
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getJaren = /* GraphQL */ `
   query GetJaren($id: ID!) {
     getJaren(id: $id) {
