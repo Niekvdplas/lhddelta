@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // @material-ui/core components
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -44,6 +44,9 @@ import { createPlayback } from "graphql/mutations";
 import { updateOverig } from "graphql/mutations";
 import { Storage } from 'aws-amplify';
 import { createOverig } from "graphql/mutations";
+import { listVapss } from "graphql/queries";
+import { TextareaAutosize } from "@material-ui/core";
+import { updateVaps } from "graphql/mutations";
 
 const useStyles = makeStyles(styles);
 
@@ -54,6 +57,7 @@ export default function AdminPage(props) {
   const [bestuur, setBestuur] = useState({id: uuidv4(), name: "", praeses: "", quaestor: "", abactis: "", assessor: "", abmail: "", seq_num: new Date().getFullYear() - 1979});
   const [dkc, setDKC] = useState({id: uuidv4(), dkcpraeses: "", dkcquaestor: "", dkcpraesesemail: "", dkcquaestoremail: "", dkcpraesesnummer: "", dkcquaestornummer: "", dkcpraesesfoto: "", dkcquaestorfoto: ""});
   const [year, setYear] = useState(0);
+  const [vaps, setVaps] = useState("");
   const [jarenlist, setjarenlist] = useState([])
   const [jaarleden, setjaarleden] = useState([])
   const [loginpw, setloginpw] = useState("")
@@ -75,6 +79,21 @@ export default function AdminPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+
+
+  useEffect(() => {
+    if (!vaps || vaps[0] == null) {
+      getData();
+    }
+  }, []);
+
+  const getData = async () => {
+    const responsevaps= await API.graphql(graphqlOperation(listVapss, { limit: 1000 }));
+    setVaps(responsevaps.data.listVapss.items.sort(function(a, b){
+      return a["num"] - b["num"];
+    }));
+  }
+
 
   function authenticate(flag = false){
     if(!flag)
@@ -193,6 +212,13 @@ export default function AdminPage(props) {
     setjaarleden(jaar);
   };
 
+  const handleVAPChange = (e, index, key) => {
+    const { name, value } = e.target;
+    var copyvaps = vaps;
+    copyvaps[index][key] = value;
+    setVaps(copyvaps);
+  };
+
   const getYear = async () => {
     if(authenticate()){
       getJaren()
@@ -299,6 +325,17 @@ export default function AdminPage(props) {
       delete jaarleden.createdAt
       delete jaarleden.updatedAt
       const update = await API.graphql(graphqlOperation(updateJaren, {input: jaarleden}));
+      window.location.href = '/deltaadmin';
+    }
+  }
+
+  const updateVAP = async () => {
+    if(authenticate()){
+      for(var i in vaps){
+        delete vaps[i].createdAt
+        delete vaps[i].updatedAt
+        const update = await API.graphql(graphqlOperation(updateVaps, {input: vaps[i]}));
+      }
       window.location.href = '/deltaadmin';
     }
   }
@@ -721,7 +758,6 @@ export default function AdminPage(props) {
                           <Button onClick={updateYear}>Update jaar</Button>
                         </div>
                       },
-                      
                       {
                         tabButton: "Update gala",
                         tabIcon: Grade,
@@ -730,6 +766,33 @@ export default function AdminPage(props) {
                           <CustomInput labelText="jaar" onChange={e => setgalayear(e.target.value)}></CustomInput>
                           <CustomInput labelText="achternaam" onChange={e => setgalaattandee(e.target.value)}></CustomInput>
                           <Button onClick={postGalaAttendee}>Voeg lid toe / Verwijder lid</Button>
+                        </div>
+                      },
+                      {
+                        tabButton: "Update VAPs",
+                        tabIcon: PublishRounded,
+                        tabContent:
+                        <div>
+                          {vaps[0] != null ?
+                          vaps.map((x, i) =>
+                          <GridItem>
+                            <div> 
+                              Naam: <CustomInput id={"name" + i} labelText={x["name"]} onChange={e => handleVAPChange(e, i, "name")}></CustomInput>
+                              <br />
+                              <div>
+                              Beschrijving: <TextareaAutosize id={"description" + i} onChange={e => handleVAPChange(e, i, "description")}>{x["description"]}</TextareaAutosize>
+                              </div>
+                              <br />
+                              Locatie: <CustomInput id={"location" + i} labelText={x["location"]} onChange={e => handleVAPChange(e, i, "location")}></CustomInput>
+                              <br />
+                              Datum: <CustomInput id={"date" + i} labelText={x["date"]} onChange={e => handleVAPChange(e, i, "date")}></CustomInput>
+                              <br />
+                            </div>
+                            <hr />
+                          </GridItem>
+                          )
+                          : null}
+                          <Button onClick={updateVAP}>Update</Button>
                         </div>
                       },
                       {
