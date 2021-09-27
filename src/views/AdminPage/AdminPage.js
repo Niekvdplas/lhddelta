@@ -97,7 +97,7 @@ export default function AdminPage(props) {
 
   function authenticate(flag = false){
     if(!flag)
-      return crypto.createHash('sha512').update(loginpw).digest('hex') == "f35e81da596808cc91e3504818515b2a7d800edb8f168c6e3251fb0fd22b5c373b099629a4c3091e07717174ecb6772ace8100b9b39f422ee5003ab0ba9b9866"
+      return crypto.createHash('sha512').update(loginpw).digest('hex') == "4e18481eb479160677276c423983ce99049efa1491dbc7d701e22753c2aa8503bb2465d231f5f70ce01e4cbc5ff726981d4f1f71c9ca662b8cb85f8623089a7a"
     else
       return crypto.createHash('sha512').update(loginpw).digest('hex') == "7bff1b9e9102564f27ce7b4947baf4cb3dbdefab2cc6999089d283b0ee13d689facc2c8f4533ef88c814964d038f662c4f056c6638f9b859220eb59ec70df120"  
     }
