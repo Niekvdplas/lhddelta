@@ -47,6 +47,8 @@ import { createOverig } from "graphql/mutations";
 import { listVapss } from "graphql/queries";
 import { TextareaAutosize } from "@material-ui/core";
 import { updateVaps } from "graphql/mutations";
+import { listPbss } from "graphql/queries";
+import { updatePbs } from "graphql/mutations";
 
 const useStyles = makeStyles(styles);
 
@@ -58,6 +60,7 @@ export default function AdminPage(props) {
   const [dkc, setDKC] = useState({id: uuidv4(), dkcpraeses: "", dkcquaestor: "", dkcpraesesemail: "", dkcquaestoremail: "", dkcpraesesnummer: "", dkcquaestornummer: "", dkcpraesesfoto: "", dkcquaestorfoto: ""});
   const [year, setYear] = useState(0);
   const [vaps, setVaps] = useState("");
+  const [pb, setPb] = useState("");
   const [jarenlist, setjarenlist] = useState([])
   const [jaarleden, setjaarleden] = useState([])
   const [loginpw, setloginpw] = useState("")
@@ -82,16 +85,18 @@ export default function AdminPage(props) {
 
 
   useEffect(() => {
-    if (!vaps || vaps[0] == null) {
+    if ((!vaps || vaps[0] == null) && (!pb)) {
       getData();
     }
   }, []);
 
   const getData = async () => {
-    const responsevaps= await API.graphql(graphqlOperation(listVapss, { limit: 1000 }));
+    const responsevaps= await API.graphql(graphqlOperation(listVapss, { limit: 10 }));
     setVaps(responsevaps.data.listVapss.items.sort(function(a, b){
       return a["num"] - b["num"];
     }));
+    const responsepb = await API.graphql(graphqlOperation(listPbss, { limit: 1, order: [['created_at', 'DESC']] }));
+    setPb(responsepb.data.listPbss.items[0]);
   }
 
 
@@ -219,6 +224,13 @@ export default function AdminPage(props) {
     setVaps(copyvaps);
   };
 
+  const handlePBChange = (e, key) => {
+    const { name, value } = e.target;
+    var copypb = pb;
+    copypb[key] = value;
+    setPb(copypb);
+  };
+
   const getYear = async () => {
     if(authenticate()){
       getJaren()
@@ -339,6 +351,15 @@ export default function AdminPage(props) {
       window.location.href = '/deltaadmin';
     }
   }
+
+  const updatePB = async () => {
+    if(authenticate()){
+      delete pb.createdAt
+      delete pb.updatedAt
+      const update = await API.graphql(graphqlOperation(updatePbs, {input: pb}));
+      window.location.href = '/deltaadmin';
+    }
+  }
   
   const postYear = async () => {
     if(authenticate()){
@@ -381,7 +402,7 @@ export default function AdminPage(props) {
           <CustomInput onChange={e => setloginpw(e.target.value)}></CustomInput>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={12}>
-              <Card className={classes[cardAnimaton]}>
+              <Card className={classes[cardAnimaton]} style={{width: "1200px"}}>
                   <CardHeader color="primary" className={classes.cardHeader}>
                     <h4>Admin panel</h4>
                   </CardHeader>
@@ -793,6 +814,32 @@ export default function AdminPage(props) {
                           )
                           : null}
                           <Button onClick={updateVAP}>Update</Button>
+                        </div>
+                      },
+                      {
+                        tabButton: "Update Playback info",
+                        tabIcon: PublishRounded,
+                        tabContent:
+                        <div>
+                          {pb != null ?
+                          <GridItem>
+                            <div> 
+                              Filmpje URL: <CustomInput id="name" labelText={pb["movieurl"]} onChange={e => handlePBChange(e, "movieurl")}></CustomInput>
+                              <br />
+                              Filmpje jaar: <CustomInput id="history" labelText={pb["movieyear"]} onChange={e => handlePBChange(e, "movieyear")}></CustomInput>
+                              <br />
+                              Locatie: <CustomInput id="locationpb" labelText={pb["location"]} onChange={e => handlePBChange(e, "location")}></CustomInput>
+                              <br />
+                              Datum: <CustomInput id="datepb" labelText={pb["date"]} onChange={e => handlePBChange(e, "date")}></CustomInput>
+                              <br />
+                              <div>
+                              Geschiedenis: <TextareaAutosize id="history" defaultValue={pb["history"]} style={{ width: "1100px"}} onChange={e => handlePBChange(e, "history")}></TextareaAutosize>
+                              </div>
+                            </div>
+                            <hr />
+                          </GridItem>
+                          : null}
+                          <Button onClick={updatePB}>Update</Button>
                         </div>
                       },
                       {

@@ -67,6 +67,41 @@ export const listVapss = /* GraphQL */ `
     }
   }
 `;
+export const getPbs = /* GraphQL */ `
+  query GetPbs($id: ID!) {
+    getPbs(id: $id) {
+      id
+      movieurl
+      location
+      date
+      movieyear
+      history
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPbss = /* GraphQL */ `
+  query ListPbss(
+    $filter: ModelPbsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPbss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        movieurl
+        location
+        date
+        movieyear
+        history
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getJaren = /* GraphQL */ `
   query GetJaren($id: ID!) {
     getJaren(id: $id) {
@@ -150,7 +185,6 @@ export const getPlayback = /* GraphQL */ `
     getPlayback(id: $id) {
       id
       year
-      link
       winner
       cancelled
       createdAt
@@ -168,7 +202,6 @@ export const listPlaybacks = /* GraphQL */ `
       items {
         id
         year
-        link
         winner
         cancelled
         createdAt

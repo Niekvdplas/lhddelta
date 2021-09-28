@@ -97,6 +97,57 @@ export const deleteVaps = /* GraphQL */ `
     }
   }
 `;
+export const createPbs = /* GraphQL */ `
+  mutation CreatePbs(
+    $input: CreatePbsInput!
+    $condition: ModelPbsConditionInput
+  ) {
+    createPbs(input: $input, condition: $condition) {
+      id
+      movieurl
+      location
+      date
+      movieyear
+      history
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePbs = /* GraphQL */ `
+  mutation UpdatePbs(
+    $input: UpdatePbsInput!
+    $condition: ModelPbsConditionInput
+  ) {
+    updatePbs(input: $input, condition: $condition) {
+      id
+      movieurl
+      location
+      date
+      movieyear
+      history
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePbs = /* GraphQL */ `
+  mutation DeletePbs(
+    $input: DeletePbsInput!
+    $condition: ModelPbsConditionInput
+  ) {
+    deletePbs(input: $input, condition: $condition) {
+      id
+      movieurl
+      location
+      date
+      movieyear
+      history
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createJaren = /* GraphQL */ `
   mutation CreateJaren(
     $input: CreateJarenInput!
@@ -219,7 +270,6 @@ export const createPlayback = /* GraphQL */ `
     createPlayback(input: $input, condition: $condition) {
       id
       year
-      link
       winner
       cancelled
       createdAt
@@ -235,7 +285,6 @@ export const updatePlayback = /* GraphQL */ `
     updatePlayback(input: $input, condition: $condition) {
       id
       year
-      link
       winner
       cancelled
       createdAt
@@ -251,7 +300,6 @@ export const deletePlayback = /* GraphQL */ `
     deletePlayback(input: $input, condition: $condition) {
       id
       year
-      link
       winner
       cancelled
       createdAt

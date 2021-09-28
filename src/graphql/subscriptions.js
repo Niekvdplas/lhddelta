@@ -79,6 +79,48 @@ export const onDeleteVaps = /* GraphQL */ `
     }
   }
 `;
+export const onCreatePbs = /* GraphQL */ `
+  subscription OnCreatePbs {
+    onCreatePbs {
+      id
+      movieurl
+      location
+      date
+      movieyear
+      history
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePbs = /* GraphQL */ `
+  subscription OnUpdatePbs {
+    onUpdatePbs {
+      id
+      movieurl
+      location
+      date
+      movieyear
+      history
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePbs = /* GraphQL */ `
+  subscription OnDeletePbs {
+    onDeletePbs {
+      id
+      movieurl
+      location
+      date
+      movieyear
+      history
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateJaren = /* GraphQL */ `
   subscription OnCreateJaren {
     onCreateJaren {
@@ -180,7 +222,6 @@ export const onCreatePlayback = /* GraphQL */ `
     onCreatePlayback {
       id
       year
-      link
       winner
       cancelled
       createdAt
@@ -193,7 +234,6 @@ export const onUpdatePlayback = /* GraphQL */ `
     onUpdatePlayback {
       id
       year
-      link
       winner
       cancelled
       createdAt
@@ -206,7 +246,6 @@ export const onDeletePlayback = /* GraphQL */ `
     onDeletePlayback {
       id
       year
-      link
       winner
       cancelled
       createdAt

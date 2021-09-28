@@ -14,6 +14,15 @@ type Vaps @model {
   description: String!
 }
 
+type Pbs @model {
+  id: ID!
+  movieurl: String!
+  location: String!
+  date: String!
+  movieyear: String!
+  history: String!
+}
+
 type Jaren @model {
   id: ID!
   members: String!
@@ -39,7 +48,6 @@ type Besturen @model {
 type Playback @model {
   id: ID!
   year: Int!
-  link: String
   winner: String!
   cancelled: String
 }
