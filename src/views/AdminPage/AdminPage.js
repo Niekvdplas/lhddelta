@@ -843,7 +843,7 @@ export default function AdminPage(props) {
                         </div>
                       },
                       {
-                        tabButton: "nieuwe DPB winnaar",
+                        tabButton: "nieuwe DPB winnaar (Typ 'afgelast' als de dpb niet door is gegaan)",
                         tabIcon: Theaters,
                         tabContent:
                         <div>
