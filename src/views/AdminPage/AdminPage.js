@@ -843,11 +843,11 @@ export default function AdminPage(props) {
                         </div>
                       },
                       {
-                        tabButton: "nieuwe DPB winnaar (Typ 'afgelast' als de dpb niet door is gegaan)",
+                        tabButton: "nieuwe DPB winnaar",
                         tabIcon: Theaters,
                         tabContent:
                         <div>
-                          <CustomInput labelText="winnaar" onChange={e => setdpbwinner(e.target.value)}></CustomInput>
+                          <CustomInput labelText="winnaar (Typ 'afgelast' als de dpb niet door is gegaan)" onChange={e => setdpbwinner(e.target.value)}></CustomInput>
                           <Button onClick={postwinner}>Voeg nieuwe winnaar toe</Button>
                         </div>
                       }
