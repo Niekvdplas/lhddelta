@@ -62,7 +62,7 @@ export default function DpbPage(props) {
     k.pblist.pop()
     for(var i = 0; i < playbacklist.length; i++){
       var playbackEntry = playbacklist[i]
-      if(playbackEntry.cancelled == 'y') playbackEntry.winner = "Afgelast"
+      if(playbackEntry.cancelled == 't') playbackEntry.winner = "Afgelast"
       k.pblist.push({year: playbackEntry.year, winner: playbackEntry.winner})
     }
     setData(k);
@@ -150,35 +150,3 @@ export default function DpbPage(props) {
     </div>
   );
 }
-
-// <GridContainer justify="center">
-//                           <GridItem xs={12} sm={12} md={4}>
-//                             <img
-//                               alt="..."
-//                               src={work1}
-//                               className={navImageClasses}
-//                             />
-//                             <img
-//                               alt="..."
-//                               src={work2}
-//                               className={navImageClasses}
-//                             />
-//                             <img
-//                               alt="..."
-//                               src={work3}
-//                               className={navImageClasses}
-//                             />
-//                           </GridItem>
-//                           <GridItem xs={12} sm={12} md={4}>
-//                             <img
-//                               alt="..."
-//                               src={work4}
-//                               className={navImageClasses}
-//                             />
-//                             <img
-//                               alt="..."
-//                               src={work5}
-//                               className={navImageClasses}
-//                             />
-//                           </GridItem>
-//                         </GridContainer>
