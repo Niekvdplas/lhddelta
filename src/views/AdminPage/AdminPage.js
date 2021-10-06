@@ -283,7 +283,6 @@ export default function AdminPage(props) {
     if(authenticate()){
       var cancelled = 'f'
       if(dpbwinner.toLowerCase() == 'afgelast'){
-        dpbwinner = "Afgelast";
         cancelled = 't'
       }
       const post = await API.graphql(graphqlOperation(createPlayback, {input: {id: uuidv4(), cancelled: cancelled, winner: dpbwinner, year: new Date().getFullYear()}}))
