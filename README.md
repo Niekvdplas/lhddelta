@@ -27,10 +27,14 @@ Put the printed hash in `src/lib/config.js` (`MEMBERS_PASSWORD_HASH`), or set it
 
 ## Amplify Hosting
 
-- Build output directory: `dist` (was `build` with Create React App).
+- Build settings live in `amplify.yml` (output directory `dist`, Node 22), so no console change is needed.
 - Keep the SPA rewrite rule: `</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json|webp)$)([^.]+$)/>` → `/index.html` (200).
 
-## Android (Capacitor)
+## Android (Capacitor 8)
 
-Capacitor is upgraded to v8 and `webDir` is now `dist`. The old `android/` project was generated
-with Capacitor 2 and has to be regenerated: `rm -rf android && npx cap add android && npm run cap:sync`.
+```bash
+npm run cap:sync   # build the site and copy it into android/
+npx cap open android
+```
+
+Then build and export the APK/AAB from Android Studio. The app keeps its id `io.ionic.delta`; version is 5.0 (versionCode 5).

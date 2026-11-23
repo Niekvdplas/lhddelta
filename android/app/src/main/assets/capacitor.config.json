@@ -1,8 +1,5 @@
 {
-    "appId": "io.ionic.delta",
-    "appName": "delta",
-    "bundledWebRuntime": false,
-    "npmClient": "npm",
-    "webDir": "build",
-    "cordova": {}
-  }
+	"appId": "io.ionic.delta",
+	"appName": "L.H.D. Delta",
+	"webDir": "dist"
+}
