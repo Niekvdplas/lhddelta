@@ -1,0 +1,7 @@
+# Ledenpagina's en beheer zijn afgeschermd en mogen niet geïndexeerd worden.
+User-agent: *
+Disallow: /leden
+Disallow: /Leden
+Disallow: /besturen
+Disallow: /Besturen
+Disallow: /deltaadmin

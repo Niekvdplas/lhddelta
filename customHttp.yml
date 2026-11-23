@@ -1,0 +1,23 @@
+# AWS Amplify Hosting: custom response headers.
+# Tells search engines never to index the members-only pages.
+customHeaders:
+  - pattern: "/leden*"
+    headers:
+      - key: X-Robots-Tag
+        value: "noindex, nofollow, noarchive"
+  - pattern: "/Leden*"
+    headers:
+      - key: X-Robots-Tag
+        value: "noindex, nofollow, noarchive"
+  - pattern: "/besturen*"
+    headers:
+      - key: X-Robots-Tag
+        value: "noindex, nofollow, noarchive"
+  - pattern: "/Besturen*"
+    headers:
+      - key: X-Robots-Tag
+        value: "noindex, nofollow, noarchive"
+  - pattern: "/deltaadmin*"
+    headers:
+      - key: X-Robots-Tag
+        value: "noindex, nofollow, noarchive"
